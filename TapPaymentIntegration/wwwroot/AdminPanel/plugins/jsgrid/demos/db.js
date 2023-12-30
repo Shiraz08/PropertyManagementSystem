@@ -1,6 +1,6 @@
 (function() {
 
-    var db = {
+    var _context = {
 
         loadData: function(filter) {
             return $.grep(this.clients, function(client) {
@@ -25,10 +25,10 @@
 
     };
 
-    window.db = db;
+    window._context = _context;
 
 
-    db.countries = [
+    _context.countries = [
         { Name: "", Id: 0 },
         { Name: "United States", Id: 1 },
         { Name: "Canada", Id: 2 },
@@ -39,7 +39,7 @@
         { Name: "Russia", Id: 7 }
     ];
 
-    db.clients = [
+    _context.clients = [
         {
             "Name": "Otto Clay",
             "Age": 61,
@@ -742,7 +742,7 @@
         }
     ];
 
-    db.users = [
+    _context.users = [
         {
             "ID": "x",
             "Account": "A758A693-0302-03D1-AE53-EEFE22855556",

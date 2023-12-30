@@ -5,9 +5,10 @@ using System.Web;
 
 namespace Property_Management_Sys.Utility
 {
-    public class UserType
+    public static class UserType
     {
-        static public int Admin = 1;
-        static public int Employee  = 2;
+        static public string SuperAdmin = "SuperAdmin";
+        static public string AppTenant  = "AppTenant";
+        static public string User  = "User";
     }
 }

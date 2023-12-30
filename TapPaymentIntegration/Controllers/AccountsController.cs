@@ -18,7 +18,9 @@ namespace Property_Management_Sys.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult Index()
+
+        #region Identity
+          public IActionResult Index()
         {
             return View();
         }
@@ -136,5 +138,32 @@ namespace Property_Management_Sys.Controllers
             ModelState.AddModelError(string.Empty, "Your Profile has been changed.");
             return View();
         }
+        #endregion
+        #region Accounts Page
+        public ActionResult Rents()
+        {
+            return View();
+        }
+        public ActionResult Asset_expenses()
+        {
+            return View();
+        }
+        public ActionResult Supplies()
+        {
+            return View();
+        }
+        public ActionResult Deposits()
+        {
+            return View();
+        }
+        public ActionResult Banks()
+        {
+            return View();
+        }
+        public ActionResult Billing()
+        {
+            return View();
+        }
+        #endregion
     }
 }

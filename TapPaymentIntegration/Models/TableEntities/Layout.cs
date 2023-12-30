@@ -15,8 +15,9 @@ namespace Property_Management_Sys.Models
         public IEnumerable<Tbl_Landlord> Tbl_Landlords { get; set; }
         public IEnumerable<Tbl_Property_Detail> Tbl_Property_Details { get; set; }
         public IEnumerable<Tbl_Tenant> Tbl_Tenants { get; set; }
-        public IEnumerable<ApplicationUser> Tbl_Users { get; set; }
-        public IEnumerable<ApplicationUser> Tbl_UserTypes2 { get; set; } 
+        public IEnumerable<ApplicationUser> SuperAdmin { get; set; }
+        public IEnumerable<ApplicationUser> AppTenant { get; set; }  
+        public IEnumerable<ApplicationUser> Users { get; set; } 
         public IEnumerable<Tbl_Invoices> Total_Invoices { get; set; }
         public IEnumerable<Tbl_Invoices> Total_Invoices_Paid { get; set; }
         public IEnumerable<Tbl_Invoices> Total_Invoices_Unpaid { get; set; }
