@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Property_Management_Sys.Areas.Identity.Data;
@@ -8,6 +9,7 @@ using Property_Management_Sys.Models.Email;
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class Agreement_PeriodController : Controller
     {
         private readonly ILogger<Agreement_PeriodController> _logger;

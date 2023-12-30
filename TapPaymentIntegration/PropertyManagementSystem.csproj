@@ -47,6 +47,41 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Agreement_Form\Create.cshtml" />
+    <None Include="Views\Agreement_Form\Delete.cshtml" />
+    <None Include="Views\Agreement_Form\Details.cshtml" />
+    <None Include="Views\Agreement_Form\DownloadAgreementForm.cshtml" />
+    <None Include="Views\Agreement_Form\DownloadInvoice.cshtml" />
+    <None Include="Views\Agreement_Form\Edit.cshtml" />
+    <None Include="Views\Agreement_Form\Index.cshtml" />
+    <None Include="Views\Landlord\Create.cshtml" />
+    <None Include="Views\Landlord\Delete.cshtml" />
+    <None Include="Views\Landlord\Details.cshtml" />
+    <None Include="Views\Landlord\Edit.cshtml" />
+    <None Include="Views\Landlord\GenerateInvoice.cshtml" />
+    <None Include="Views\Landlord\Index.cshtml" />
+    <None Include="Views\Landlord_Generate_Invoice\Create.cshtml" />
+    <None Include="Views\Landlord_Generate_Invoice\Delete.cshtml" />
+    <None Include="Views\Landlord_Generate_Invoice\Details.cshtml" />
+    <None Include="Views\Landlord_Generate_Invoice\Edit.cshtml" />
+    <None Include="Views\Landlord_Generate_Invoice\Index.cshtml" />
+    <None Include="Views\Property_Detail\Create.cshtml" />
+    <None Include="Views\Property_Detail\Delete.cshtml" />
+    <None Include="Views\Property_Detail\Details.cshtml" />
+    <None Include="Views\Property_Detail\Edit.cshtml" />
+    <None Include="Views\Property_Detail\Index.cshtml" />
+    <None Include="Views\Report\ExpiringContracts.cshtml" />
+    <None Include="Views\Report\ViewRentDetails.cshtml" />
+    <None Include="Views\Tbl_Invoices\Create.cshtml" />
+    <None Include="Views\Tbl_Invoices\Delete.cshtml" />
+    <None Include="Views\Tbl_Invoices\Details.cshtml" />
+    <None Include="Views\Tbl_Invoices\Edit.cshtml" />
+    <None Include="Views\Tbl_Invoices\Index.cshtml" />
+    <None Include="Views\Tenant\Create.cshtml" />
+    <None Include="Views\Tenant\Delete.cshtml" />
+    <None Include="Views\Tenant\Details.cshtml" />
+    <None Include="Views\Tenant\Edit.cshtml" />
+    <None Include="Views\Tenant\Index.cshtml" />
     <None Include="wwwroot\adminpage\a.png" />
     <None Include="wwwroot\adminpage\admin.png" />
     <None Include="wwwroot\adminpage\b.jpg" />

@@ -1,0 +1,163 @@
+﻿@model Property_Management_Sys.Models.Tbl_Landlord_Generate_Invoice
+
+@{
+    ViewBag.Title = "Create";
+}
+<h3><b>Contract Expire </b></h3>
+<hr />
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+                <div class="form-horizontal">
+                    <div class="row" style="padding-left: 26px;">
+                        <span>Select Landlord</span>
+                        <div class="col-md-9">
+                            @Html.DropDownList("Landlord_Generate_Invoice_Extra", null, htmlAttributes: new { @class = "form-control", @id = "Landlord_Generate_Invoice_Extra" })
+                        </div>
+                        <span></span>
+                        <div class="col-md-2">
+                            <button id="btnsendtoadvancepurchase" class="btn btn-success">Save </button>
+                        </div>
+                    </div>
+                </div>
+                <br />
+        
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table id="orderDetail" class="orderDetail display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center!important">
+                                            <span>Add Row</span>
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            <span>Remove Row</span>
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Amount)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Description)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align:center!important">
+                                        <td>
+                                            <button type="button" class="insertbutton btn btn-success" title="Insert before this row">+</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="removebutton btn btn-danger" title="Remove this row">-</button>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="number" name="InvoiceAmount1" id="InvoiceAmount1" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" name="InvoiceDescription1" id="InvoiceDescription1" />
+                                        </td>
+                                        <td style="display:none!important"><input type="hidden" id="landlordval1" name="landlordval1" class="form-control" /></td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $("#btnsendtoadvancepurchase").on('click', function () {
+        var validation = $("#InvoiceAmount1").val();
+        if (validation != "") {
+            var landval = $("#Landlord_Generate_Invoice_Extra option:selected").val();
+            $("#landlordval1").val(landval);
+            var customers = new Array();
+            $("#orderDetail TBODY TR").each(function () {
+                var row = $(this);
+                var customer = {};
+                customer.Landlord_Generate_Invoice_Description = $('td input[name="InvoiceDescription1"]', row).val();
+                customer.Landlord_Generate_Invoice_Amount = $('td input[name="InvoiceAmount1"]', row).val(),
+                    customer.Landlord_Generate_Invoice_Extra = $('td input[name="landlordval1"]', row).val(),
+                    customers.push(customer);
+            });
+            var lanlordvalue = $("#Landlord_Generate_Invoice_Extra option:selected").val();
+            $.ajax({
+                type: "POST",
+                url: "/Landlord_Generate_Invoice/PostQuestionAndOptions",
+                data: JSON.stringify(customers, lanlordvalue),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    alert("Row Successfully Added....!");
+                    window.location = "/Landlord_Generate_Invoice/Index";
+                }
+            });
+        }
+        else {
+            alert("Please Enter Amount...!")
+        }
+
+    });
+</script>
+<script>
+    var i = 1;
+    $(document).ready(function () {
+        $("#addrow").click(function () {
+            $("tr:last").clone().find("input")
+                .each(function () {
+                    $(this).attr({
+                        'id': function (_, id) {
+                            var regex = /[a-zA-Z]+/
+                            return id.match(regex) + i
+                        },
+                        'name': function (_, name) {
+                            var regex = /[a-zA-Z]+/
+                            return name.match(regex) + i
+                        },
+                        'value': '',
+                    });
+                })
+                .end().appendTo("#orderDetail > tbody:last");
+            i++;
+        });
+    });
+
+    $(document).on('click', 'button.insertbutton', function () {
+        var rowCount = $('#orderDetail tr').length;
+        $(this).closest('tr').before($(this).closest('tr').clone());
+        $(this).closest('tr').find('input').each(function () {
+            $(this).attr({
+                'id': function (_, id) {
+                    var regex = /[a-zA-Z]+/
+                    return id.match(regex) + rowCount
+                },
+                'name': function (_, name) {
+                    var regex = /[a-zA-Z]+/
+                    return name.match(regex) + i
+                },
+                'value': '',
+            })
+        })
+
+        return true;
+    });
+
+    $(document).on('click', 'button.removebutton', function () {
+        var rowCount = $('#orderDetail tr').length - 1;
+        if (rowCount == 1) {
+            alert('You Must Have At Least One Row')
+            return false
+        }
+        else {
+            $(this).closest('tr').remove();
+            return true;
+        }
+    });
+</script>

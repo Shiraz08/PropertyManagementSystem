@@ -1,0 +1,99 @@
+﻿@model Property_Management_Sys.Models.Tbl_Agreement_Form
+@{
+    Layout = null;
+    var invoice_info = ViewBag.tbl_invoice;
+}
+
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+    <style type="text/css">
+        <!--
+        span.cls_002 {
+            font-family: Times,serif;
+            font-size: 8.1px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_002 {
+            font-family: Times,serif;
+            font-size: 8.1px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+        -->
+    </style>
+    <script type="text/javascript" src="20f95ce0-7ff5-11eb-8b25-0cc47a792c0a_id_20f95ce0-7ff5-11eb-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
+</head>
+<body >
+    <button class="btn btn-danger" id="pdf">PDF</button>
+    <div id="download" style="position:absolute;left:50%;margin-left:-306px;top:20px;width:612px;height:850px;overflow:hidden;">
+        <div style="position:absolute;left:0px;top:0px">
+            <img src="~/Agreement Form Template/ri_1.png" style="height: 58px;width: 98px;padding-left: 21px;padding-top: 8px;">
+        </div>
+        <div style="position:absolute;left:517.99px;top:38.48px" class="cls_002"><span class="cls_002">@DateTime.Now</span></div>
+        <div style="position:absolute;left:34.49px;top:80.93px" class="cls_002"><span class="cls_002">From</span></div>
+        <div style="position:absolute;left:222.91px;top:80.93px" class="cls_002"><span class="cls_002">To</span></div>
+        <div style="position:absolute;left:411.33px;top:80.93px" class="cls_002"><span class="cls_002"><h3><b>Inoice # @invoice_info.Invoice_Id</b></h3></span></div>
+        <div style="position:absolute;left:33.67px;top:84.75px" class="cls_002"><span class="cls_002"><h3><b>@Model.Landlord_Name Lanlord</b></h3></span></div>
+        <div style="position:absolute;left:222.91px;top:84.75px" class="cls_002"><span class="cls_002"><h3><b>@Model.Tenant_Name Tenant</b></h3></span></div>
+        <div style="position:absolute;left:34.49px;top:110.56px" class="cls_002"><span class="cls_002">@Model.Landlord_Identiy_Card_No</span></div>
+        <div style="position:absolute;left:222.91px;top:110.56px" class="cls_002"><span class="cls_002">I</span></div>
+        <div style="position:absolute;left:225.83px;top:110.56px" class="cls_002"><span class="cls_002">@Model.Tenant_Identity_Card</span></div>
+        <div style="position:absolute;left:411.39px;top:95.49px" class="cls_002"><span class="cls_002"><h3><b>Agreement # @Model.Agreement_Form_Id</b></h3></span></div>
+        <div style="position:absolute;left:34.49px;top:125.38px" class="cls_002"><span class="cls_002">@Model.Landlord_EmailId</span></div>
+        <div style="position:absolute;left:222.91px;top:125.38px" class="cls_002"><span class="cls_002">@Model.Tenant_Email</span></div>
+        <div style="position: absolute; left: 412.63px; top: 112.3px;" class="cls_002"><span class="cls_002"><h3><b>Invoice Paid: &nbsp; @if (invoice_info.Invoice_Paid == true)
+        { <span style="color:green!important">Yes</span>}
+        else { <span style="color:red!important">No</span> }</b></h3></span></div>
+        <div style="position:absolute;left:34.49px;top:140.19px" class="cls_002"><span class="cls_002">@Model.Landlord_Whatsapp_number</span></div>
+        <div style="position:absolute;left:222.91px;top:140.19px" class="cls_002"><span class="cls_002">@Model.Tenant_Contact </span></div>
+        <div style="position:absolute;left:46.91px;top:175.75px" class="cls_002"><span class="cls_002"><h5><b>Sr #</b></h5></span></div>
+        <div style="position:absolute;left:192.06px;top:175.75px" class="cls_002"><span class="cls_002"><h5><b>Building Name</b></h5></span></div>
+        <div style="position:absolute;left:336.42px;top:175.75px" class="cls_002"><span class="cls_002"><h5><b>Unit No</b></h5></span></div>
+        <div style="position:absolute;left:499.73px;top:175.75px" class="cls_002"><span class="cls_002"><h5><b>Building No</b></h5></span></div>
+        <div style="position: absolute; left: 49.85px; top: 203.90px;" class="cls_002"><span class="cls_002">@Model.Pro_Detail_Id</span></div>
+        <div style="position: absolute; left: 200.37px; top: 203.90px;" class="cls_002"><span class="cls_002">@Model.Builiding_Name</span></div>
+        <div style="position:absolute;left:339.07px;top:203.90px" class="cls_002"><span class="cls_002">@Model.Apt_Villa_No</span></div>
+        <div style="position: absolute; left: 507.94px; top: 203.90px;" class="cls_002"><span class="cls_002">@Model.Building_No</span></div>
+        <div style="position:absolute;left:34.49px;top:240.94px" class="cls_002"><span class="cls_002"><h3><b>Payment Information</b></h3></span></div>
+        <div style="position: absolute; left: 350.39px; top: 243.72px;" class="cls_002"><span class="cls_002"><h3><b>Rent Amount:</b></h3></span></div>
+        <div style="position: absolute; left: 495.53px; top: 254.72px;" class="cls_002"><span class="cls_002">@Model.Rent_Amount</span></div>
+        <div style="position: absolute; left: 349.82px; top: 270.13px; " class="cls_002"><span class="cls_002"><h3><b>Security Deposite:</b></h3></span></div>
+        <div style="position: absolute; left: 495.53px; top: 280.13px; " class="cls_002"><span class="cls_002">@Model.Security_Desposit</span></div>
+        <div style="position: absolute; left: 34.91px; top: 276.84px; " class="cls_002"><span class="cls_002"><h3><b>Meezan Bank : &nbsp; 098776655443</b></h3></span></div>
+        <div style="position: absolute; left: 34.74px; top: 295.25px;" class="cls_002"><span class="cls_002"><h3><b>Meezan Bank Address: &nbsp; Sabzazar, lahore,Pakistan</b></h3></span></div>
+        <div style="position: absolute; left: 36.04px; top: 337.66px;" class="cls_002"><span class="cls_002"><h3><b>Habib Bank : &nbsp; 098773344556</b></h3></span></div>
+        <div style="position: absolute; left: 37.2px; top: 356.07px;" class="cls_002"><span class="cls_002"><h3><b>Habib Bank Address: &nbsp; Multan Road, lahore,Pakistan</b></h3></span></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#pdf').click(function () {
+                var data = document.getElementById('download');
+                console.log(data);
+                html2canvas(data).then(canvas => {
+                    var imgWidth = 200;
+                    var imgHeight = canvas.height * imgWidth / canvas.width;
+                    const contentDataURL = canvas.toDataURL('image/png');
+                    let pdf = new jsPDF('p', 'mm', 'a4');
+                    var position = 0;
+                    pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+                    pdf.save('invoice.pdf');
+                    // window.open(pdf.output('bolburl', { filename: 'invoice.pdf'}, '_blank'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

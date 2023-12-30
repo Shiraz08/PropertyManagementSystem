@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using Property_Management_Sys.Models.Email;
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class Property_DetailController : Controller
     {
         private readonly ILogger<Property_DetailController> _logger;

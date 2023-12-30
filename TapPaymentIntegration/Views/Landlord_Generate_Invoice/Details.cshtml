@@ -1,0 +1,204 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Tbl_Landlord_Generate_Invoice>
+
+@{
+    Layout = null;
+    var getlist = ViewBag.Landlord_Generate_Invoice_Extra as IEnumerable<Property_Management_Sys.Models.Tbl_Landlord>;
+}
+
+@*@Html.DisplayFor(model => model.Landlord_Generate_Invoice_Datetime)*@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Landlord Invoice</title>
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+
+                .invoice-box table td {
+                    padding: 5px;
+                    vertical-align: top;
+                }
+
+                .invoice-box table tr td:nth-child(2) {
+                    text-align: right;
+                }
+
+                .invoice-box table tr.top table td {
+                    padding-bottom: 20px;
+                }
+
+                    .invoice-box table tr.top table td.title {
+                        font-size: 45px;
+                        line-height: 45px;
+                        color: #333;
+                    }
+
+                .invoice-box table tr.information table td {
+                    padding-bottom: 40px;
+                }
+
+                .invoice-box table tr.heading td {
+                    background: #eee;
+                    border-bottom: 1px solid #ddd;
+                    font-weight: bold;
+                }
+
+                .invoice-box table tr.details td {
+                    padding-bottom: 20px;
+                }
+
+                .invoice-box table tr.item td {
+                    border-bottom: 1px solid #eee;
+                }
+
+                .invoice-box table tr.item.last td {
+                    border-bottom: none;
+                }
+
+                .invoice-box table tr.total td:nth-child(2) {
+                    border-top: 2px solid #eee;
+                    font-weight: bold;
+                }
+
+                /*    media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }*/
+
+                .invoice-box table tr.information table td {
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                }
+
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+            .rtl table {
+                text-align: right;
+            }
+
+                .rtl table tr td:nth-child(2) {
+                    text-align: left;
+                }
+    </style>
+
+    <link href="~/adminpage/css/helper.css" rel="stylesheet">
+    <link href="~/adminpage/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <button class="btn btn-danger" id="pdf">PDF</button>
+    <br /><br />
+    <div class="invoice-box" id="download">
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="~/Theme/assets/logo-dark.png" style="width: 69%; max-width: 110px; padding-right: 357px;">
+                        </td>
+                        @foreach (var item in Model.Take(1))
+                        {
+                    <td style="padding-top: 38px;color:black!important">
+                        Invoice #: @item.Landlord_Generate_Invoice_Id<br>
+                        Created: @DateTime.Now <br />
+                        Landlord Name:  @ViewBag.landlord
+                    </td>
+                        }
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%;padding-top:37px!important">
+            <thead>
+                <tr>
+                    <th style="text-align: center !important;color: black">
+                        <span>Invoice Datetime</span>
+                    </th>
+                    <th style="text-align:center!important;color:black">
+                        <span>Invoice Amount</span>
+                    </th>
+                    <th style="text-align:center!important;color:black">
+                        <span>Description</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="text-align:center!important">
+                        <td style="color:black">
+                            @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Datetime)
+                        </td>
+                        <td style="text-align: center !important;color: black">
+                            @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Amount)
+                        </td>
+                        <td style="text-align: center !important;color: black">
+                            @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Description)
+                        </td>
+                    </tr>
+                }
+                <br />
+                <tr class="total">
+                    <td></td>
+
+                    <td>
+                        <span style="color:black">Total:</span> &nbsp;&nbsp; <span style="color:black">@ViewBag.paid</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+    <script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#pdf').click(function () {
+                var data = document.getElementById('download');
+                console.log(data);
+                html2canvas(data).then(canvas => {
+                    var imgWidth = 200;
+                    var imgHeight = canvas.height * imgWidth / canvas.width;
+                    const contentDataURL = canvas.toDataURL('image/png');
+                    let pdf = new jsPDF('p', 'mm', 'a4');
+                    var position = 0;
+                    pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+                    pdf.save('invoice.pdf');
+                    // window.open(pdf.output('bolburl', { filename: 'invoice.pdf'}, '_blank'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

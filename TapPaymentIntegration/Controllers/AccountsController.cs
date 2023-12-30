@@ -8,6 +8,7 @@ using Property_Management_Sys.Models.Roles;
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class AccountsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

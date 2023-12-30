@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
@@ -8,6 +9,7 @@ using ApplicationUser = Property_Management_Sys.Areas.Identity.Data.ApplicationU
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Property_Management_Sys.Areas.Identity.Data;
@@ -6,6 +7,7 @@ using Property_Management_Sys.Data;
 using Property_Management_Sys.Models.Email;
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly ILogger<ReportController> _logger;

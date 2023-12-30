@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Property_Management_Sys.Models.Email;
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class Tbl_InvoicesController : Controller
     {
         private readonly ILogger<Tbl_InvoicesController> _logger;

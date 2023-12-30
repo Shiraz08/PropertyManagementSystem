@@ -1,6 +1,7 @@
 ﻿
 using System.Data;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using Property_Management_Sys.Models.Email;
 
 namespace Property_Management_Sys.Controllers
 {
+    [Authorize]
     public class Landlord_Generate_InvoiceController : Controller
     {
         private readonly ILogger<Landlord_Generate_InvoiceController> _logger;

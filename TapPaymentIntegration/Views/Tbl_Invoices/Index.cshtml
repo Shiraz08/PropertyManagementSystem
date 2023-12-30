@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Tbl_Invoices>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Landlord_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenant_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invoice_Created_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invoice_Paid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenant_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Landlord_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rent_Ammount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agreement_Form_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invoice_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invoice_Paid_To_Landlord)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Landlord_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tenant_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice_Created_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice_Paid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tenant_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Landlord_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rent_Ammount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agreement_Form_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Invoice_Paid_To_Landlord)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Invoice_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Invoice_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Invoice_Id })
+        </td>
+    </tr>
+}
+
+</table>

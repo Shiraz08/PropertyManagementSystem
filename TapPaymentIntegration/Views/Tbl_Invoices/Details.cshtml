@@ -1,0 +1,98 @@
+﻿@model Property_Management_Sys.Models.Tbl_Invoices
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tbl_Invoices</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Landlord_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Landlord_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenant_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenant_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice_Created_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice_Created_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice_Paid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice_Paid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenant_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenant_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Landlord_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Landlord_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rent_Ammount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rent_Ammount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agreement_Form_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agreement_Form_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice_Paid_To_Landlord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice_Paid_To_Landlord)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Invoice_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

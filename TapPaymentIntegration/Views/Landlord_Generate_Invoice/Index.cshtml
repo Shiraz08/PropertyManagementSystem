@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Tbl_Landlord_Generate_Invoice>
+
+@{
+    ViewBag.Title = "Index";
+    var getlist = ViewBag.Landlordinfo as IEnumerable<Property_Management_Sys.Models.Tbl_Landlord>;
+}
+
+
+<link href="~/adminpage/css/helper.css" rel="stylesheet">
+<link href="~/adminpage/css/style.css" rel="stylesheet">
+<br />
+<center><h2><b>Landlord Invoices List</b></h2></center>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            @using (Html.BeginForm("Index", "Landlord_Generate_Invoice", FormMethod.Post))
+            {
+                <div class="form-horizontal">
+                    <div class="row" style="padding-left: 26px;">
+                        <span>Select Landlord</span>
+                        <div class="col-md-9">
+                            @Html.DropDownList("Landlord_Generate_Invoice_Extra", null, htmlAttributes: new { @class = "form-control", @id = "Landlord_Generate_Invoice_Extra" })
+                        </div>
+                        <span></span>
+                        <div class="col-md-2">
+                            <button id="btnsendtoadvancepurchase" class="btn btn-success">Search </button>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
+            @if (Model != null)
+            {
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Datetime)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Amount)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Description)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Landlord_Generate_Invoice_Total)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                <span>Landlord Name</span>
+                                            </th>
+                                            <th style="text-align:center!important">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr style="text-align:center!important">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Datetime)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Amount)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Description)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Landlord_Generate_Invoice_Total)
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        var val = Convert.ToInt32(item.Landlord_Generate_Invoice_Extra);
+                                                        var name = getlist.Where(x => x.Landlord_Id == val).Select(x => x.Landlord_Name).FirstOrDefault();
+                                                        <span>@name</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("See Invoices", "Details", new { id = item.Landlord_Generate_Invoice_Extra }) |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Landlord_Generate_Invoice_Id })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>

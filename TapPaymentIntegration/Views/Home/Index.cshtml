@@ -1,6 +1,7 @@
-﻿@model IEnumerable<Property_Management_Sys.Models.Layout>
+﻿@model Property_Management_Sys.Models.Layout
 @using Microsoft.AspNetCore.Identity
 @using Property_Management_Sys.Areas.Identity.Data
+@using Property_Management_Sys.Utility;
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
 @{
@@ -8,4 +9,399 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 	var user = await UserManager.GetUserAsync(User);
 }
+@{
+    var usertype =user.UserType.ToString();
+    if (usertype == UserType.SuperAdmin)
+    {
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-body">
+                        <div class="row">
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","User")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-user-alt-5 bg-c-blue card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total App Tenant </span>
+                                            <h4>@Model.AppTenant.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","User")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-user bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total Users </span>
+                                            <h4>@Model.Users.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Tenant")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-home-search bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total Tenants </span>
+                                            <h4>@Model.Tbl_Tenants.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Property_Detail")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-info-circle bg-c-yellow card1-icon"></i>
+                                            <span class="text-c-yellow f-w-600">Property Details</span>
+                                            <h4>@Model.Tbl_Property_Details.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Landlord")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-ui-home bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total LandLords </span>
+                                            <h4>@Model.Tbl_Landlords.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Agreement_Period")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-info-square bg-c-blue card1-icon"></i>
+                                            <span class="text-c-blue f-w-600">Total Agreement Period</span>
+                                            <h4>@Model.Tbl_Agreement_Period.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-investigation bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total Invoices </span>
+                                            <h4>@Model.Total_Invoices.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                                            <span class="text-c-pink f-w-600">Total Agreement</span>
+                                            <h4>@Model.Tbl_Agreement_Forms.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                        </div>
+                        <div class="row">
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill bg-c-blue card1-icon"></i>
+                                        <span class="text-c-blue f-w-600">Total Paid Invoices</span>
+                                        <h4>@Model.Total_Invoices_Paid.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill-alt bg-c-yellow card1-icon"></i>
+                                        <span class="text-c-yellow f-w-600">Total Un-Paid Invoices</span>
+                                        <h4>@Model.Total_Invoices_Unpaid.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill-alt bg-c-yellow card1-icon"></i>
+                                        <span class="text-c-yellow f-w-600">Un-Paid To Landlord</span>
+                                        <h4>@Model.Total_Invoices_Unpaid_to_Landlord.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill bg-c-pink card1-icon"></i>
+                                        <span class="text-c-pink f-w-600">Piad To Landlord</span>
+                                        <h4>@Model.Total_Invoices_Paid_to_Landlord.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                        </div>
+                        <br /><br />
+                        <link href="~/adminpage/css/helper.css" rel="stylesheet">
+                        <link href="~/adminpage/css/style.css" rel="stylesheet">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Agreement Form List</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center!important">
+                                                    <span>Period From Date</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>Period To Date</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>Rent Ammount</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>LandLord Name</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>Building No</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>Building Name</span>
+                                                </th>
+                                                <th style="text-align:center!important">
+                                                    <span>Tenant Name</span>
+                                                </th>
+                                                <th style="text-align:center!important"><span>Tenant Contact</span></th>
+                                                <th style="text-align:center!important"><span>Tenant Email</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Tbl_Agreement_Forms)
+                                            {
+                                                <tr style="text-align:center!important">
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Agreement_Period_From_DateTime)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Agreement_Period_To_DateTime)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Rent_Amount)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Landlord_Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Building_No)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Builiding_Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Tenant_Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Tenant_Contact)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Tenant_Email)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
 
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    @{
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Welcome @user.UserName !</strong> Your Current Password is @user.Password
+                        </div>
+                    }
+                    <div class="page-body">
+                        <div class="row">
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill-alt bg-c-yellow card1-icon"></i>
+                                        <span class="text-c-yellow f-w-600">Un-Paid To Landlord</span>
+                                        <h4>@Model.Total_Invoices_Unpaid_to_Landlord.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill bg-c-pink card1-icon"></i>
+                                        <span class="text-c-pink f-w-600">Piad To Landlord</span>
+                                        <h4>@Model.Total_Invoices_Paid_to_Landlord.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-home-search bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total Tenants </span>
+                                            <h4>@Model.Tbl_Tenants.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-info-circle bg-c-yellow card1-icon"></i>
+                                            <span class="text-c-yellow f-w-600">Property Details</span>
+                                            <h4>@Model.Tbl_Property_Details.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-ui-home bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total LandLords </span>
+                                            <h4>@Model.Tbl_Landlords.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-info-square bg-c-blue card1-icon"></i>
+                                            <span class="text-c-blue f-w-600">Total Agreement Period</span>
+                                            <h4>@Model.Tbl_Agreement_Period.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-investigation bg-c-green card1-icon"></i>
+                                            <span class="text-c-green f-w-600">Total Invoices </span>
+                                            <h4>@Model.Total_Invoices.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <a href="#">
+                                        <div class="card-block-small">
+                                            <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                                            <span class="text-c-pink f-w-600">Total Agreement</span>
+                                            <h4>@Model.Tbl_Agreement_Forms.Count()</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                        </div>
+                        <div class="row">
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill bg-c-blue card1-icon"></i>
+                                        <span class="text-c-blue f-w-600">Total Paid Invoices</span>
+                                        <h4>@Model.Total_Invoices_Paid.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                            <!-- card1 start -->
+                            <div class="col-md-6 col-xl-3">
+                                <div class="card widget-card-1">
+                                    <div class="card-block-small">
+                                        <i class="icofont icofont-bill-alt bg-c-yellow card1-icon"></i>
+                                        <span class="text-c-yellow f-w-600">Total Un-Paid Invoices</span>
+                                        <h4>@Model.Total_Invoices_Unpaid.Count()</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- card1 end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+<script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>

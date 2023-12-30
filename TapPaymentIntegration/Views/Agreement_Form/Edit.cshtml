@@ -1,0 +1,526 @@
+﻿@model Property_Management_Sys.Models.Tbl_Agreement_Form
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <center><h3><b> Edit Agreement Form</b></h3></center>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Agreement_Form_Id)
+                    @Html.HiddenFor(model => model.Landlord_Id)
+                    @Html.HiddenFor(model => model.Pro_Detail_Id)
+                    @Html.HiddenFor(model => model.Tenant_Id)
+                    <h4 style="color:black!important"><b>Landlord Info</b></h4>
+                    <div class="row">
+                        @Html.LabelFor(model => model.Landlord_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <select id="Landlord_Name" name="Landlord_Name" class="js-example-basic-single form-control" onchange="callautoload();">
+                                @if (ViewBag.lanlords != null)
+                                {
+                                    <option value="">Select Landlord</option>
+                                    foreach (var item in ViewBag.lanlords)
+                                    {
+                                        if (item.Text != null)
+                                        {
+                                            <option value="@item.Text">
+                                                @item.Value
+                                            </option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                        @Html.LabelFor(model => model.Landlord_Identiy_Card_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Landlord_Identiy_Card_No, new { htmlAttributes = new { @class = "form-control", @onchange = "landlordgetdata();" } })
+                            @Html.ValidationMessageFor(model => model.Landlord_Identiy_Card_No, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="hidden" name="Landlord_Id" id="Landlord_Id" />
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Landlord_Whatsapp_number, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Landlord_Whatsapp_number, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Landlord_Whatsapp_number, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Landlord_Unique_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Landlord_Unique_No, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Landlord_Unique_No, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Landlord_EmailId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Landlord_EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Landlord_EmailId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <h4 style="color:black!important"><b>Tenant Info</b></h4>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.Tenant_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @*@Html.EditorFor(model => model.Tenant_Name, new { htmlAttributes = new { @class = "form-control", @onchange = "callautoload2();" } })*@
+                            <select id="Tenant_Name" name="Tenant_Name" class="js-example-basic-single form-control" onchange="callautoload2();">
+                                @if (ViewBag.Tenants != null)
+                                {
+                                    <option value="">Select Tenant</option>
+                                    foreach (var item in ViewBag.Tenants)
+                                    {
+                                        if (item.Text != null)
+                                        {
+                                            <option value="@item.Text">
+                                                @item.Value
+                                            </option>
+                                        }
+                                    }
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Tenant_Name, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Tenant_Identity_Card, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tenant_Identity_Card, new { htmlAttributes = new { @class = "form-control", @onchange = "Tenantgetdata();" } })
+                            @Html.ValidationMessageFor(model => model.Tenant_Identity_Card, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="hidden" name="Tenant_Id" id="Tenant_Id" />
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Tenant_Contact, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tenant_Contact, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tenant_Contact, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Tenant_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tenant_Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tenant_Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <h4 style="color:black!important"><b>Property Info</b></h4>
+                    <div class="row">
+                        @Html.LabelFor(model => model.Builiding_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <select id="Builiding_Name" name="Builiding_Name" class="form-control" onchange="Pro_Detailgetdata2();">
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Builiding_Name, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Building_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Building_No, new { htmlAttributes = new { @class = "form-control", @onchange = "Pro_Detailgetdata();" } })
+                            @Html.ValidationMessageFor(model => model.Building_No, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="hidden" name="Pro_Detail_Id" id="Pro_Detail_Id" />
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Apt_Villa_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Apt_Villa_No, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Apt_Villa_No, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Water_Acc_NO, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Water_Acc_NO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Water_Acc_NO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Elec_Water_Acc_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Elec_Water_Acc_No, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Elec_Water_Acc_No, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <h4 style="color:black!important"><b>Agreement Info</b></h4>
+                    <div class="row">
+                        <span class="control-label col-md-2">Time Period</span>
+                        <div class="col-md-4">
+                            <select class="form-control" id="timeperiods" name="timeperiods" required>
+                                <option value="">Please Select Time Period</option>
+                                <option value="1">One Month</option>
+                                <option value="3">Three Month</option>
+                                <option value="6">Six Month</option>
+                                <option value="9">Nine Month</option>
+                                <option value="12">Twelve Month</option>
+                            </select>
+                        </div>
+                        @Html.LabelFor(model => model.Agreement_Period_From_DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Agreement_Period_From_DateTime, new { htmlAttributes = new { @class = "form-control", @id = "fromdate", @autocomplete = "off", @onchange = "Agreement_Period_From_DateTimefun()", @placeholder = "Please Select Date" } })
+                            @Html.ValidationMessageFor(model => model.Agreement_Period_From_DateTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Agreement_Period_To_DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Agreement_Period_To_DateTime, new { htmlAttributes = new { @class = "form-control", @id = "todate", @placeholder = "Please Select Date", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Agreement_Period_To_DateTime, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Rent_Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Rent_Amount, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Rent_Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Security_Desposit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Security_Desposit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Security_Desposit, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Payment_Term, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <select name="Payment_Term" id="Payment_Term" class="form-control">
+                                <option value="0">Please Select Payment Term</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Payment_Term, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        @Html.LabelFor(model => model.Invoice_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Invoice_No, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Invoice_No, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2" style="visibility:hidden!important"></div>
+                        <div class=" col-md-4">
+                            <input type="submit" value="Edit" class="btn btn-default" />
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hidedata" name="hidedata" />
+<input type="hidden" id="hidedata2" name="hidedata2" />
+<input type="hidden" id="hidedata3" name="hidedata3" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+    $(document).ready(function () {
+        $("#fromdate").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-20:+0"
+        });
+        $("#todate").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-20:+0"
+        });
+    });
+</script>
+<script>
+    function landlordgetdata() {
+        $.ajax({
+            url: "/Agreement_Form/landlordgetdataidcard",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: $("#Landlord_Identiy_Card_No").val() },
+            success: function (response) {
+                debugger
+                $("#Landlord_Id").val(response.Landlord_Id);
+                $("#Landlord_Whatsapp_number").val(response.Landlord_Whatsapp_number);
+                $("#Landlord_Name").val(response.Landlord_Name);
+                $("#Landlord_EmailId").val(response.Landlord_EmailId);
+                $("#Landlord_Unique_No").val(response.Landlord_Unique_No);
+                var ids = response.Landlord_Id;
+                fillbuilding(ids);
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+    function callautoload() {
+        debugger
+        var val = $("#Landlord_Name option:selected").val();
+        if (val == "") {
+            alert("please Select Landlord...!");
+            $("#Landlord_Id").val('');
+            $("#Landlord_Whatsapp_number").val('');
+            $("#Landlord_EmailId").val('');
+            $("#Landlord_Unique_No").val('');
+            $("#Landlord_Identiy_Card_No").val('');
+            $("#Landlord_Name option:selected").val('');
+        }
+        else {
+            $.ajax({
+                url: "/Agreement_Form/landlordgetdata",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { vals: val },
+                success: function (response) {
+                    $("#Landlord_Id").val(response.Landlord_Id);
+                    $("#Landlord_Whatsapp_number").val(response.Landlord_Whatsapp_number);
+                    $("#Landlord_EmailId").val(response.Landlord_EmailId);
+                    $("#Landlord_Unique_No").val(response.Landlord_Unique_No);
+                    $("#Landlord_Identiy_Card_No").val(response.Landlord_Identiy_Card_No);
+                    var ids = response.Landlord_Id;
+                    fillbuilding(ids);
+                },
+                error: function (xhr) {
+                    alert('Landlord Does not Exist...!');
+                }
+            });
+        }
+
+    }
+    function fillbuilding(ids) {
+        $.ajax({
+            url: "/Agreement_Form/fillbuildingdropdown",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: ids },
+            success: function (response) {
+                console.log(response);
+                $('#Builiding_Name').html('');
+                var options = '';
+                options += '<option value="Select">Select Building</option>';
+                for (var i = 0; i < response.length; i++) {
+                    options += '<option value="' + response[i].Text + '">' + response[i].Value + '</option>';
+                }
+                $('#Builiding_Name').append(options);
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+    //$(document).ready(function () {
+    //    jQuery("#Landlord_Name").autocomplete({
+    //        source: function (request, response) {
+    //            $.ajax({
+    //                url: "/Agreement_Form/LandlordSuggestion",
+    //                type: "POST",
+    //                dataType: "json",
+    //                data: { Prefix: request.term },
+    //                success: function (data) {
+    //                    response($.map(data, function (item) {
+    //                        $("#hidedata").val(item.Landlord_Identiy_Card_No);
+    //                        return { label: item.Landlord_Name, value: item.Landlord_Name };
+    //                    }))
+    //                }
+    //            })
+    //        },
+    //        messages: {
+    //            noResults: "ffffd", results: "fddf"
+    //        }
+    //    });
+    //})
+</script>
+<script>
+    function Tenantgetdata() {
+        $.ajax({
+            url: "/Agreement_Form/Tenantgetdataidcard",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: $("#Tenant_Identity_Card").val() },
+            success: function (response) {
+                $("#Tenant_Id").val(response.Tenant_Id);
+                $("#Tenant_Contact").val(response.Tenant_Contact);
+                $("#Tenant_Email").val(response.Tenant_Email);
+                $("#Tenant_Name").val(response.Tenant_Name);
+            },
+            error: function (xhr) {
+                alert('Tenant Does not Exist...!');
+            }
+        });
+    }
+    function callautoload2() {
+        var val = $("#Tenant_Name option:selected").val();
+        if (val == "") {
+            alert("please Select Tenant...!");
+            $("#Tenant_Id").val('');
+            $("#Tenant_Contact").val('');
+            $("#Tenant_Email").val('');
+            $("#Tenant_Identity_Card").val('');
+        }
+        else {
+            $.ajax({
+                url: "/Agreement_Form/Tenantgetdata",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { vals: val },
+                success: function (response) {
+                    $("#Tenant_Id").val(response.Tenant_Id);
+                    $("#Tenant_Contact").val(response.Tenant_Contact);
+                    $("#Tenant_Email").val(response.Tenant_Email);
+                    $("#Tenant_Identity_Card").val(response.Tenant_Identity_Card);
+                },
+                error: function (xhr) {
+                    alert('Tenant Does not Exist...!');
+                }
+            });
+        }
+
+    }
+    $(document).ready(function () {
+        jQuery("#Tenant_Name").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Agreement_Form/TenantSuggestion",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            $("#hidedata2").val(item.Tenant_Identity_Card);
+                            return { label: item.Tenant_Name, value: item.Tenant_Name };
+                        }))
+                    }
+                })
+            },
+            messages: {
+                noResults: "ffffd", results: "fddf"
+            }
+        });
+    })
+</script>
+<script>
+    function Pro_Detailgetdata() {
+        $.ajax({
+            url: "/Agreement_Form/Pro_Detailgetdata",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: $("#Building_No").val() },
+            success: function (response) {
+                $("#Pro_Detail_Id").val(response.Pro_Detail_Id);
+                $("#Apt_Villa_No").val(response.Apt_Villa_No);
+                $("#Complex_No").val(response.Complex_No);
+                $("#Elec_Water_Acc_No").val(response.Elec_Water_Acc_No);
+                $("#Builiding_Name").val(response.Building_No);
+            },
+            error: function (xhr) {
+                alert('Property Does not Exist...!');
+            }
+        });
+    }
+    function Pro_Detailgetdata2() {
+        $.ajax({
+            url: "/Agreement_Form/Pro_Detailgetdata",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: $('#Builiding_Name option:selected').val() },
+            success: function (response) {
+                $("#Pro_Detail_Id").val(response.Pro_Detail_Id);
+                $("#Apt_Villa_No").val(response.Apt_Villa_No);
+                $("#Water_Acc_NO").val(response.Water_Acc_NO);
+                $("#Elec_Water_Acc_No").val(response.Elec_Water_Acc_No);
+                $("#Building_No").val(response.Building_No);
+            },
+            error: function (xhr) {
+                alert('Property Does not Exist...!');
+            }
+        });
+    }
+</script>
+<script>
+    function Agreement_Period_From_DateTimefun() {
+        var getdate = $("#fromdate").val();
+        debugger
+        var arr_dateText = getdate.split("/");
+        startyear = arr_dateText[2];
+        startmonth = arr_dateText[1];
+        startdate = arr_dateText[0];
+        var gettimeperiod = $('#timeperiods option:selected').val();
+        var newdate = addMonths(new Date(startyear, startmonth, startdate), gettimeperiod).toString();
+        var gg = newdate.split(' ');
+        startmonth2 = gg[1]
+        var we = getMonthFromString(startmonth2);
+        wer = gg[2];
+        startday2 = parseInt(wer) - parseInt(1);
+        startyear2 = gg[3];
+        if (gettimeperiod == null) {
+            alert("Please Select Time Period Dropdown....!");
+        }
+        else {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var sssss = "0" + gettimeperiod;
+            const num1 = parseInt(sssss);
+            const num2 = parseInt(mm);
+            const sum = num1 + num2;
+            var finalvalue = we;
+            var newdate = mm + "-" + dd + "-" + startyear2;
+            var convertdate = new Date(newdate);
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            if (startday2 == "0") {
+                var today = "30" + "/" + (finalvalue) + "/" + (startyear2);
+                $("#todate").val(today);
+            }
+            else {
+                var today = startday2 + "/" + (finalvalue) + "/" + (startyear2);
+                $("#todate").val(today);
+            }
+
+        }
+    }
+    function getMonthFromString(mon) {
+        return new Date(Date.parse(mon + " 1, 2012")).getMonth()
+    }
+    function addMonths(date, months) {
+        var d = date.getDate();
+        date.setMonth(date.getMonth() + +months);
+        if (date.getDate() != d) {
+            date.setDate(0);
+        }
+        return date;
+    }
+</script>

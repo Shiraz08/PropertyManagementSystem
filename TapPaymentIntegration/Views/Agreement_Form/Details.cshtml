@@ -1,0 +1,213 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Tbl_Invoices>
+
+@{
+    ViewBag.Title = "Invoices";
+}
+
+<link href="~/adminpage/css/helper.css" rel="stylesheet">
+<link href="~/adminpage/css/style.css" rel="stylesheet">
+<center><h2><b>Invoice List</b></h2></center>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-body">
+                <div class="card">
+                    <div style="float:left!important">
+                        <label for=""><h3><b>Paid</b></h3><span><h3 style="color:royalblue">@ViewBag.paid</h3></span></label> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;    <label for=""><h3><b>Paid To Landlord</b></h3><span><h3 style="padding-left:61px!important;color:royalblue">@ViewBag.paidtolandlord</h3></span></label>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                        <label for=""><h3><b>Un-Paid</b></h3> <span><h3 style="color:red!important;padding-left:10px">@ViewBag.unpaid</h3></span></label> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;   <label for=""><h3><b>Un-Paid To Landlord</b></h3> <span><h3 style="padding-left:61px!important;color:red">@ViewBag.unpaidtolandlord</h3></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        @{
+                            var sadaf = Model.Select(x => x.Agreement_Form_Id).FirstOrDefault();
+                            <input type="button" value="All Invoice Paid" onclick="allinvoicepaid(@sadaf);" class="btn btn-success" style="background-color: #5685db;color: yellow;" />
+                            <input type="button" value="All Invoice Paid To Landlord" onclick="allinvoicepaidtolandlord(@sadaf);" class="btn btn-success" style="background-color: #5685db;color: yellow;" />
+                        }
+                        <div class="table-responsive">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Invoice_Created_Date)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Invoice_Paid)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Tenant_Name)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Name)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Rent_Ammount)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Invoice_Date)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Invoice_Paid_To_Landlord)
+                                        </th>
+                                        <th style="text-align:center!important">Invoice Paid</th>
+                                        <th style="text-align:center!important">Invoice Paid To Landlord</th>
+                                        <th style="text-align:center!important">Download Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="text-align:center!important">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Invoice_Created_Date)
+                                            </td>
+                                            <td>
+                                                @if (item.Invoice_Paid == false)
+                                                {
+                                                    <span style="border-radius:3px; color: red !important">No</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="        border-radius: 3px;color: #5685db !important">Yes</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tenant_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Rent_Ammount)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Invoice_Date)
+                                            </td>
+                                            <td>
+                                                @if (item.Invoice_Paid_To_Landlord == false)
+                                                {
+                                                    <span style="border-radius:3px;  color: red !important">No</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="        border-radius: 3px;color: #5685db!important">Yes</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var id = item.Invoice_Id;
+                                                    <input type="button" class="btn btn-success" onclick="paidinvoice(@id);" value="Paid Invoice" style="background-color: #5685db;color: yellow;" />
+                                                }
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var id2 = item.Invoice_Id;
+                                                    <input type="button" class="btn btn-success" onclick="paidinvoiceTOlandlord(@id2);" value="Paid Invoice To Landlord" style="background-color: #5685db;color: yellow;" />
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Download Invoice", "DownloadInvoice", new { id = item.Invoice_Id })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>
+
+<script>
+    function allinvoicepaidtolandlord(sadaf) {
+        $.ajax({
+            url: "/Agreement_Form/allinvoicepaidtolandlord",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: sadaf },
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+    function allinvoicepaid(sadaf) {
+        $.ajax({
+            url: "/Agreement_Form/allinvoicepaid",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: sadaf },
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+    function paidinvoice(id) {
+        $.ajax({
+            url: "/Agreement_Form/paidinvoice",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: id },
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+    function paidinvoiceTOlandlord(id2) {
+        $.ajax({
+            url: "/Agreement_Form/paidinvoiceTOlandlord",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: { vals: id2 },
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr) {
+                alert('Landlord Does not Exist...!');
+            }
+        });
+    }
+</script>
+
+

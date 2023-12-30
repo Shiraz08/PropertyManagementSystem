@@ -1,33 +1,65 @@
-﻿<!DOCTYPE html>
+﻿@model Property_Management_Sys.Models.Tbl_User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>Property Management System</title>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin - Tap Integration</title>
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="~/AdminPanel/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="~/AdminPanel/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/AdminPanel/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="~/AdminPanel/plugins/toastr/toastr.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="CodedThemes">
+    <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="CodedThemes">
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="~/Theme/assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Theme/assets/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Theme/assets/icon/icofont/css/icofont.css">
+    <link rel="stylesheet" type="text/css" href="~/Theme/assets/css/style.css">
 </head>
-<body class="hold-transition login-page">
 
-      
+<body class="fix-menu">
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <section class="login p-fixed d-flex text-center bg-primary " style="background-color:white!important">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
             @RenderBody()
-  
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src="~/AdminPanel/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/AdminPanel/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/AdminPanel/dist/js/adminlte.min.js"></script>
-
-    <script src="~/AdminPanel/plugins/toastr/toastr.min.js"></script>
+            <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+        <!-- end of container-fluid -->
+    </section>
+    <script type="text/javascript" src="~/Theme/assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/modernizr/css-scrollbars.js"></script>
+    <script type="text/javascript" src="~/Theme/assets/js/common-pages.js"></script>
 </body>
 </html>

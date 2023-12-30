@@ -1,0 +1,105 @@
+﻿@using Property_Management_Sys.Utility;
+@model IEnumerable<Property_Management_Sys.Models.Tbl_Landlord>
+@using Microsoft.AspNetCore.Identity
+@using Property_Management_Sys.Areas.Identity.Data
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	var user = await UserManager.GetUserAsync(User);
+}
+
+<link href="~/adminpage/css/helper.css" rel="stylesheet">
+<link href="~/adminpage/css/style.css" rel="stylesheet">
+<center><h2><b>Landlord List</b></h2></center>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+
+                                <thead>
+                                    <tr style="text-align:center!important">
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Name)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Whatsapp_number)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_EmailId)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Identiy_Card_No)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Unique_No)
+                                        </th>
+                                        <th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Landlord_Datetime)
+                                        </th>
+                                        <th style="text-align:center!important">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="text-align:center!important">
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Landlord_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Whatsapp_number)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_EmailId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Identiy_Card_No)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Unique_No)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Datetime)
+                                            </td>
+                                            <td>
+                                                @{ var typeval = user.UserType;
+                                                    if (typeval == UserType.SuperAdmin)
+                                                    {
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.Landlord_Id })
+
+                                                    }
+                                                } |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Landlord_Id })
+                                                |
+                                                @Html.ActionLink("Tenant Agreement Details", "Details", new { id = item.Landlord_Id })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+<script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>

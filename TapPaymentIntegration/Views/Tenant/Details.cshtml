@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Tbl_Agreement_Form>
+
+@{
+    ViewBag.Title = "Tenant Agreement Details";
+}
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- Basic table card start -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Agreement List</h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="icofont icofont-simple-left "></i></li>
+                                    <li><i class="icofont icofont-maximize full-card"></i></li>
+                                    <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                    <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                    <li><i class="icofont icofont-error close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Agreement_Period_From_DateTime)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Agreement_Period_To_DateTime)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Landlord_Name)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Building_No)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Tenant_Name)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Tenant_Email)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Tenant_Contact)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Tenant_Identity_Card)
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr style="text-align:center!important">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Agreement_Period_From_DateTime)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Agreement_Period_To_DateTime)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Landlord_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Building_No)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tenant_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tenant_Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tenant_Contact)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tenant_Identity_Card)
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
