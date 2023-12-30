@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Property_Management_Sys.Models.Layout>
+@using Microsoft.AspNetCore.Identity
+@using Property_Management_Sys.Areas.Identity.Data
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	var user = await UserManager.GetUserAsync(User);
+}
+
