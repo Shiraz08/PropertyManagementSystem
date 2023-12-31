@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PropertyManagementSystem.Models.TableEntities.AppTenant>
+
+@{
+    ViewBag.Title = "App Tenant Details";
+}
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- Basic table card start -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Agreement List</h5>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="icofont icofont-simple-left "></i></li>
+                                    <li><i class="icofont icofont-maximize full-card"></i></li>
+                                    <li><i class="icofont icofont-minus minimize-card"></i></li>
+                                    <li><i class="icofont icofont-refresh reload-card"></i></li>
+                                    <li><i class="icofont icofont-error close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.AppTenantName)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.AppTenantPropertyName)
+                                            </th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr style="text-align:center!important">
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.AppTenantName)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.AppTenantPropertyName)
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

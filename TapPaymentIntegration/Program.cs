@@ -11,7 +11,7 @@ using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("TapPaymentIntegrationContextConnection") ?? throw new InvalidOperationException("Connection string 'TapPaymentIntegrationContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("PropertyContextConnection") ?? throw new InvalidOperationException("Connection string 'PropertyContextConnection' not found.");
 builder.Services.AddDbContext<TapPaymentIntegrationContext>(options =>options.UseSqlServer(connectionString));
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<TapPaymentIntegrationContext>();
 builder.Services.AddDbContext<TapPaymentIntegrationContext>(options =>
@@ -29,23 +29,31 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 });
 // Add Hangfire services
-builder.Services.AddHangfire(configuration => configuration
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(builder.Configuration.GetConnectionString("TapPaymentIntegrationContextConnection"), new SqlServerStorageOptions
-    {
-        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-        QueuePollInterval = TimeSpan.Zero,
-        UseRecommendedIsolationLevel = true,
-        DisableGlobalLocks = true
-    }));
+//builder.Services.AddHangfire(configuration => configuration
+//    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+//    .UseSimpleAssemblyNameTypeSerializer()
+//    .UseRecommendedSerializerSettings()
+//    .UseSqlServerStorage(builder.Configuration.GetConnectionString("TapPaymentIntegrationContextConnection"), new SqlServerStorageOptions
+//    {
+//        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+//        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+//        QueuePollInterval = TimeSpan.Zero,
+//        UseRecommendedIsolationLevel = true,
+//        DisableGlobalLocks = true
+//    }));
 
 // Add the processing server as IHostedService
-builder.Services.AddHangfireServer();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//builder.Services.AddHangfireServer();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+builder.Services.AddAuthentication()
+    .AddGoogle("google", opt =>
+    {
+        var googleAuth = builder.Configuration.GetSection("Authentication:Google");
+        opt.ClientId = googleAuth["ClientId"];
+        opt.ClientSecret = googleAuth["ClientSecret"];
+        opt.SignInScheme = IdentityConstants.ExternalScheme;
+    });
 // Session
 builder.Services.AddMvc();
 builder.Services.AddSession(options => {
@@ -68,10 +76,10 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
-    //var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    //var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    //await StaticRoles.SeedRolesAsync(userManager, roleManager);
-    //await StaticRoles.SeedSuperAdminAsync(userManager, roleManager);
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await StaticRoles.SeedRolesAsync(userManager, roleManager);
+    await StaticRoles.SeedSuperAdminAsync(userManager, roleManager);
 
 }
 if (!app.Environment.IsDevelopment())
@@ -94,7 +102,7 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapRazorPages();
     endpoints.MapControllers();
-    endpoints.MapHangfireDashboard();
+    //endpoints.MapHangfireDashboard();
 });
 app.Run();
 

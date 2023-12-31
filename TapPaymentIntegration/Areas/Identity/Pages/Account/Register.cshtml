@@ -2,9 +2,11 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_IdentityLayout.cshtml";
 }
+@using Property_Management_Sys.Areas.Identity.Pages.Account;
 
-<h1>@ViewData["Title"]</h1>
+
 
 <div class="row">
     <div class="col-md-4">

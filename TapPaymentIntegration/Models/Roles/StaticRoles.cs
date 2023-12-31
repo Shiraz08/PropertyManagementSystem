@@ -6,6 +6,7 @@ using CRM.Models;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Models
 {
@@ -26,7 +27,8 @@ namespace Property_Management_Sys.Models
         public enum Roles
         {
             SuperAdmin,
-            Customer
+            AppTenant,
+            User
         }
 
         public static List<Claim> AllClaims = new List<Claim>()
@@ -48,9 +50,12 @@ namespace Property_Management_Sys.Models
                 FullName = "Super Admin",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                UserType = "SuperAdmin",
+                UserType = UserType.SuperAdmin,
                 Status = true,
                 Password = "Pass@123",
+                IsDeleted = false,
+                AddedBy = "ByDefault",
+                AddedDate = DateTime.UtcNow             
             };
 
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
