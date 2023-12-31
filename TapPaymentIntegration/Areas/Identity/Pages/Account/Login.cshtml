@@ -59,7 +59,8 @@
                                         <p>
                                             @foreach (var provider in providers)
                                             {
-                                                <input type="submit" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" value="@provider.Name" name="provider" />
+                                                var btn_val = "Sign in With" + @provider.Name;
+                                                <input type="submit" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" value="@btn_val" name="provider" />
                                             }
                                         </p>
                                     </div>
