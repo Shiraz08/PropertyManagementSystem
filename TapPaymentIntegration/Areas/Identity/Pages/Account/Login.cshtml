@@ -1,4 +1,5 @@
 ﻿@page
+@using Property_Management_Sys.Areas.Identity.Data;
 @using Property_Management_Sys.Areas.Identity.Pages.Account;
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
@@ -54,13 +55,12 @@
                             }
                             else
                             {
-                                <form asp-action="ExternalLogin" method="post" class="form-horizontal">
+                                <form asp-action="ExternalLogin"  method="post" class="form-horizontal">
                                     <div>
                                         <p>
                                             @foreach (var provider in providers)
                                             {
-                                                var btn_val = "Sign in With" + " " +@provider.Name;
-                                                <input type="submit" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" value="@btn_val" name="provider" />
+                                                <button type="submit" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" value="@provider.Name" name="provider">shiraz</button>
                                             }
                                         </p>
                                     </div>

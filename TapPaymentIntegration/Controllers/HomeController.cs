@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Protocol.Plugins;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
@@ -14,7 +15,7 @@ using ApplicationUser = Property_Management_Sys.Areas.Identity.Data.ApplicationU
 
 namespace Property_Management_Sys.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -35,6 +36,7 @@ namespace Property_Management_Sys.Controllers
             _userStore = userStore;
             _environment = Environment;
         }
+        [Authorize]
         public ActionResult Index()
         {
             Layout model = new Layout();
@@ -73,7 +75,7 @@ namespace Property_Management_Sys.Controllers
             var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (signInResult.Succeeded)
             {
-                return LocalRedirect(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
             if (signInResult.IsLockedOut)
             {
@@ -105,7 +107,7 @@ namespace Property_Management_Sys.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
@@ -124,40 +126,11 @@ namespace Property_Management_Sys.Controllers
                     Password = "Pass@123",
                     IsDeleted = false,
                     AddedBy = "ByDefault",
-                    AddedDate = DateTime.UtcNow
+                    AddedDate = DateTime.UtcNow,
+                    AppTenantId = model.ApptenantVal,
+                    AppTenantName = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.ApptenantVal)).Select(x => x.TenantName).FirstOrDefault()
                 };
                 user = defaultUser;
-
-                await _userManager.AddToRoleAsync(user, Roles.User.ToString());
-                var id = roleManager.Roles.Where(x => x.Name == Roles.User.ToString()).Select(x => x.Id).FirstOrDefault();
-                ClaimsListViewModel cla = new ClaimsListViewModel();
-
-                List<ClaimsListViewModel> inputData = new List<ClaimsListViewModel>();
-
-                // going through collection from which I want to copy
-                foreach (var parameter in AllClaims)
-                {
-                    inputData.Add(new ClaimsListViewModel() { IsSelected = true, ClaimsType = parameter.Value });
-                }
-                claimsViewModel.RoleId = id;
-                claimsViewModel.ClaimsList = inputData;
-
-                var Role = await roleManager.FindByIdAsync(claimsViewModel.RoleId);
-                if (Role.Id != "" && Role.Id != null)
-                {
-                    IList<Claim> cl = await roleManager.GetClaimsAsync(Role);
-                    for (var i = 0; i < cl.Count; i++)
-                    {
-                        var results = await roleManager.RemoveClaimAsync(Role, cl[i]);
-                    }
-
-                    foreach (var item in claimsViewModel.ClaimsList.Where(c => c.IsSelected == true))
-                    {
-                        Claim c = new Claim(item.ClaimsType, item.ClaimsType);
-                        var r = await roleManager.AddClaimAsync(Role, c);
-                    }
-                }
-
                 result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -175,6 +148,11 @@ namespace Property_Management_Sys.Controllers
                 ModelState.TryAddModelError(error.Code, error.Description);
             }
             return View(nameof(ExternalLogin), model);
+        }
+        public JsonResult GetAllAppTenant(string vals)
+        {
+            var response = _context.AppTenant.Where(x => x.Status == true && x.IsDeleted == false).Select(x => new SelectListItem { Text = x.TenantId.ToString(), Value = x.TenantName.ToString() }).ToList();
+            return Json(response);
         }
         public static List<Claim> AllClaims = new List<Claim>()
         {

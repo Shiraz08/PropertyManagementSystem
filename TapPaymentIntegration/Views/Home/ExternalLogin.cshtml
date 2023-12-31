@@ -26,14 +26,15 @@
                 <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email</label>
-                        <input asp-for="Email" class="form-control" />
+                        <label>Email</label>
+                        <input asp-for="Email" class="form-control"  />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Email" class="control-label">Property Name</label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label>Property Name</label>
+                        <select id="ApptenantVal" name="ApptenantVal" class="form-control" required="required">
+                        </select>
+                        <span asp-validation-for="ApptenantVal" class="text-danger"></span>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -45,4 +46,33 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+<script>
+    $(document).ready(function () {
+        GetAppTenant();
+    });
+    function GetAppTenant() 
+    {
+        $.ajax({
+            url: "/Home/GetAllAppTenant",
+            type: "GET",
+            data: { vals: "2" },
+            success: function (response) {
+                console.log(response);
+                $('#ApptenantVal').html('');
+                var options = '';
+                options += '<option value = "0" > Select App Tenant </option>';
+                for (var i = 0; i < response.length; i++) {
+                    options += '<option value ="' + response[i].Text + '">' + response[i].Value + ' </option>';
+                }
+                $('#ApptenantVal').append(options);
+            },
+            error: function (xhr) {
+                alert('App tenant Does not Exist...!');
+            }
+        });
+    }
+</script>
