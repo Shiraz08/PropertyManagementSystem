@@ -10,8 +10,10 @@ namespace Property_Management_Sys.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
+    [Required]
     public string Password { get; set; }
     public string FullName { get; set; }
+    [Required]
     public string UserType { get; set; }
     public string PropertyName { get; set; }
     public string AppTenantName { get; set; }

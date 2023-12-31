@@ -1,0 +1,78 @@
+﻿@model Property_Management_Sys.Areas.Identity.Data.ApplicationUser
+ @{ 
+     ViewData["Title"] = "Registration";
+     Layout = "~/Views/Shared/_IdentityLayout.cshtml";
+  }
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="signup-card card-block auth-body mr-auto ml-auto">
+            <div class="auth-box">
+                <div class="row m-b-20">
+                    <div class="col-md-12">
+                        <img src="~/Theme/assets/logo-dark.png" alt="logo.png" style="height: 85px;">
+                    </div>
+                    <div class="col-md-12">
+                        <h3 class="text-center txt-primary">Sign Up.</h3>
+                    </div>
+                </div>
+                <hr />
+                @using (Html.BeginForm("Registration", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter User Name", required = "required" } })
+                    </div>
+                    <div class="input-group">
+                        <select id="AppTenantId" name="AppTenantId" class="form-control" required="required"></select>
+                    </div>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter User Email", required = "required", type = "email" } })
+                    </div>
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password", @type = "Password", required = "required" } })
+                    </div>
+                    <div class="row m-t-30">
+                        <div class="col-md-12">
+                            <input type="submit" style="color: yellow" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" value="Sign Up Now" />
+                        </div>
+                    </div>
+                }
+                <div class="text-center">
+                    <div class="col-md-12">
+                        <center><h3>Already have Account?....<a href="@Url.Action("Login", "Account", new { Areas = "Identity" })" style="color:red!important;font-size:21px!important">Sign In</a></h3></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () 
+    {
+        GetAppTenant();
+    });
+    function GetAppTenant() {
+        $.ajax({
+            url: "/Home/GetAllAppTenant",
+            type: "GET",
+            data: { vals: "2" },
+            success: function (response) {
+                console.log(response);
+                $('#AppTenantId').html('');
+                var options = '';
+                options += '<option value = " " > Select App Tenant </option>';
+                for (var i = 0; i < response.length; i++) {
+                    options += '<option value ="' + response[i].Text + '">' + response[i].Value + ' </option>';
+                }
+                $('#AppTenantId').append(options);
+            },
+            error: function (xhr) {
+                alert('App tenant Does not Exist...!');
+            }
+        });
+    }
+</script>

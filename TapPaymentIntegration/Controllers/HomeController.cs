@@ -161,5 +161,31 @@ namespace Property_Management_Sys.Controllers
             new Claim("canviewuser","canviewuser"),
             new Claim("superadminpermission","superadminpermission")
         };
+
+        public ActionResult Registration()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registration(ApplicationUser application)
+        {
+            if (ModelState.IsValid)
+            {
+                application.AddedBy = application.UserName;
+                application.AddedDate = DateTime.UtcNow;
+                application.UserName = UserType.User;
+                application.Status = true;
+                application.IsDeleted = false;
+                var getapptenantinfo = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(application.AppTenantId)).FirstOrDefault();
+                application.AppTenantName = getapptenantinfo.AppTenantName;
+                application.AppTenantId = getapptenantinfo.TenantId.ToString();
+                application.PropertyName = getapptenantinfo.TenantPropertyName;
+                _context.Users.Add(application);
+                _context.SaveChanges();
+                return RedirectToAction("Login", "Account", new { Areas = "Identity" });
+            }
+            return View();
+        }
     }
 }
