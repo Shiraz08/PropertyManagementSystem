@@ -67,6 +67,8 @@ namespace Property_Management_Sys.Controllers
                 tbl_Tenant.AddedDate = DateTime.Now;
                 var names = FirstCharToUpper(tbl_Tenant.AppTenantName);
                 tbl_Tenant.AppTenantName = names;
+                tbl_Tenant.TenantName = names;
+                tbl_Tenant.TenantPropertyName = tbl_Tenant.AppTenantPropertyName;
                 _context.AppTenant.Add(tbl_Tenant);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
