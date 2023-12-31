@@ -54,12 +54,12 @@
                             }
                             else
                             {
-                                <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                <form asp-action="ExternalLogin" method="post" class="form-horizontal">
                                     <div>
                                         <p>
                                             @foreach (var provider in providers)
                                             {
-                                                var btn_val = "Sign in With" + @provider.Name;
+                                                var btn_val = "Sign in With" + " " +@provider.Name;
                                                 <input type="submit" class="btn btn-success btn-md btn-block waves-effect text-center m-b-20" value="@btn_val" name="provider" />
                                             }
                                         </p>

@@ -53,6 +53,7 @@ namespace Property_Management_Sys.Controllers
             model.Total_Invoices_Unpaid_to_Landlord = (from t in _context.Tbl_Invoices select t).Where(x => x.Invoice_Paid_To_Landlord == false).ToList();
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
@@ -86,13 +87,6 @@ namespace Property_Management_Sys.Controllers
                 return View("ExternalLogin", new ExternalLoginModel { Email = email });
             }
         }
-        public static List<Claim> AllClaims = new List<Claim>()
-        {
-            new Claim("canadduser","canadduser"),
-            new Claim("canupdateuser","canupdateuser"),
-            new Claim("canviewuser","canviewuser"),
-            new Claim("superadminpermission","superadminpermission")
-        };
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginModel model, string returnUrl = null)
@@ -182,5 +176,12 @@ namespace Property_Management_Sys.Controllers
             }
             return View(nameof(ExternalLogin), model);
         }
+        public static List<Claim> AllClaims = new List<Claim>()
+        {
+            new Claim("canadduser","canadduser"),
+            new Claim("canupdateuser","canupdateuser"),
+            new Claim("canviewuser","canviewuser"),
+            new Claim("superadminpermission","superadminpermission")
+        };
     }
 }
