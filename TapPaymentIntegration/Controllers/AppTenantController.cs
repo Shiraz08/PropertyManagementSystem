@@ -65,10 +65,10 @@ namespace Property_Management_Sys.Controllers
             if (ModelState.IsValid)
             {
                 tbl_Tenant.AddedDate = DateTime.Now;
-                var names = FirstCharToUpper(tbl_Tenant.AppTenantName);
-                tbl_Tenant.AppTenantName = names;
+                var names = FirstCharToUpper(tbl_Tenant.TenantName);
                 tbl_Tenant.TenantName = names;
-                tbl_Tenant.TenantPropertyName = tbl_Tenant.AppTenantPropertyName;
+                tbl_Tenant.TenantName = names;
+                tbl_Tenant.TenantPropertyName = tbl_Tenant.TenantPropertyName;
                 _context.AppTenant.Add(tbl_Tenant);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,8 +98,8 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                var names = FirstCharToUpper(tbl_Tenant.AppTenantName);
-                tbl_Tenant.AppTenantName = names;
+                var names = FirstCharToUpper(tbl_Tenant.TenantName);
+                tbl_Tenant.TenantName = names;
                 _context.Entry(tbl_Tenant).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

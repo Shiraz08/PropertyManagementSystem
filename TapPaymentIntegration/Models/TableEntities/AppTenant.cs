@@ -6,7 +6,6 @@ namespace PropertyManagementSystem.Models.TableEntities
     {
         [Key]
         public int TenantId { get; set; }
-        public string TenantIdextra { get; set; }
         public string TenantName { get; set; }
         public string TenantPropertyName { get; set; }
     }

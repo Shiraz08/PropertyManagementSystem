@@ -11,6 +11,7 @@ using Property_Management_Sys.Utility;
 using PropertyManagementSystem.Models;
 using System.Security.Claims;
 using static Property_Management_Sys.Models.StaticRoles;
+using static System.Net.Mime.MediaTypeNames;
 using ApplicationUser = Property_Management_Sys.Areas.Identity.Data.ApplicationUser;
 
 namespace Property_Management_Sys.Controllers
@@ -90,7 +91,6 @@ namespace Property_Management_Sys.Controllers
             }
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginModel model, string returnUrl = null)
         {
             if (!ModelState.IsValid)
@@ -128,7 +128,8 @@ namespace Property_Management_Sys.Controllers
                     AddedBy = "ByDefault",
                     AddedDate = DateTime.UtcNow,
                     AppTenantId = model.ApptenantVal,
-                    AppTenantName = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.ApptenantVal)).Select(x => x.TenantName).FirstOrDefault()
+                    AppTenantName = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.ApptenantVal)).Select(x => x.TenantName).FirstOrDefault(),
+                    PropertyName = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.ApptenantVal)).Select(x => x.TenantPropertyName).FirstOrDefault()
                 };
                 user = defaultUser;
                 result = await _userManager.CreateAsync(user);
@@ -168,22 +169,37 @@ namespace Property_Management_Sys.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration(ApplicationUser application)
+        public async Task<ActionResult> Registration(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
-                application.AddedBy = application.UserName;
-                application.AddedDate = DateTime.UtcNow;
-                application.UserName = UserType.User;
-                application.Status = true;
-                application.IsDeleted = false;
-                var getapptenantinfo = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(application.AppTenantId)).FirstOrDefault();
-                application.AppTenantName = getapptenantinfo.AppTenantName;
-                application.AppTenantId = getapptenantinfo.TenantId.ToString();
-                application.PropertyName = getapptenantinfo.TenantPropertyName;
-                _context.Users.Add(application);
-                _context.SaveChanges();
-                return RedirectToAction("Login", "Account", new { Areas = "Identity" });
+                var getapptenantinfo = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.AppTenantId)).FirstOrDefault();
+                var defaultUser = new ApplicationUser
+                {
+                    UserName = model.Email.Split('@')[0],
+                    Email = model.Email,
+                    FullName = model.Email.Split('@')[0],
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    UserType = UserType.User,
+                    Status = true,
+                    Password = model.Password,
+                    IsDeleted = false,
+                    AddedBy = "ByDefault",
+                    AddedDate = DateTime.UtcNow,
+                    AppTenantId = getapptenantinfo.TenantId.ToString(),
+                    AppTenantName = getapptenantinfo.TenantName,
+                    PropertyName = getapptenantinfo.TenantPropertyName
+                };
+                IdentityResult result  = await _userManager.CreateAsync(defaultUser, defaultUser.Password);
+                if (result.Succeeded)
+                {
+                    var results = await _signInManager.PasswordSignInAsync(defaultUser.UserName.ToString(), defaultUser.Password, true, lockoutOnFailure: true);
+                    if (results.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
             }
             return View();
         }

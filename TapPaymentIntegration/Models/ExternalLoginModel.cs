@@ -8,6 +8,7 @@ namespace PropertyManagementSystem.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
         public string ApptenantVal { get; set; }
         public ClaimsPrincipal Principal { get; set; }
     }

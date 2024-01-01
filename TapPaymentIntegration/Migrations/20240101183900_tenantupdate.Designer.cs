@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Property_Management_Sys.Data;
 
@@ -11,9 +12,10 @@ using Property_Management_Sys.Data;
 namespace PropertyManagementSystem.Migrations
 {
     [DbContext(typeof(TapPaymentIntegrationContext))]
-    partial class TapPaymentIntegrationContextModelSnapshot : ModelSnapshot
+    [Migration("20240101183900_tenantupdate")]
+    partial class tenantupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

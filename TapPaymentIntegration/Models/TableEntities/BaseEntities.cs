@@ -2,9 +2,6 @@
 {
     public class BaseEntities
     {
-        public string AppTenantPropertyName { get; set; } 
-        public string AppTenantId { get; set; }
-        public string AppTenantName { get; set; }
         public bool Status { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime AddedDate { get; set; }
