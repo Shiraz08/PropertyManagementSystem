@@ -36,13 +36,13 @@ namespace Property_Management_Sys.Controllers
         }
         public ActionResult Index()
         {
-            return View(_context.Tbl_Agreement_Form.OrderByDescending(x=>x.Agreement_Form_Id).ToList());
+            return View(_context.Tbl_Agreement_Form.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.Agreement_Form_Id).ToList());
         }
         [HttpPost]
         public JsonResult LandlordSuggestion(string Prefix)
         {
 
-            var ObjList = _context.Tbl_Landlord.ToList();
+            var ObjList = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
                             where  N.Landlord_Name.Contains(Prefix.ToUpper())
                             select new { N.Landlord_Name, N.Landlord_Identiy_Card_No });
@@ -53,7 +53,7 @@ namespace Property_Management_Sys.Controllers
         public JsonResult TenantSuggestion(string Prefix)
         {
 
-            var ObjList = _context.Tbl_Tenant.ToList();
+            var ObjList = _context.Tbl_Tenant.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
                             where N.Tenant_Name.StartsWith(Prefix.ToUpper())
                             select new { N.Tenant_Name, N.Tenant_Identity_Card });
@@ -62,7 +62,7 @@ namespace Property_Management_Sys.Controllers
         [HttpPost]
         public JsonResult Pro_DetailSuggestion(string Prefix)
         {
-            var ObjList = _context.Tbl_Property_Detail.ToList();
+            var ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
                             where N.Builiding_Name.StartsWith(Prefix)
                             select new { N.Builiding_Name });
@@ -212,6 +212,10 @@ namespace Property_Management_Sys.Controllers
                 tbl_Agreement_Form.Tenant_Name = Tenantname;
                 var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Builiding_Name).FirstOrDefault();
                 tbl_Agreement_Form.Builiding_Name = dd;
+                tbl_Agreement_Form.Status = true;
+                tbl_Agreement_Form.IsDeleted = false;
+                tbl_Agreement_Form.AddedDate = DateTime.UtcNow;
+                tbl_Agreement_Form.AddedBy = GetCurrentUserAsync().Result.UserType;
                 _context.Tbl_Agreement_Form.Add(tbl_Agreement_Form);
                 _context.SaveChanges();
                 //code for generate invoices
@@ -235,6 +239,10 @@ namespace Property_Management_Sys.Controllers
                     tbl_Invoices.Rent_Ammount = tbl_Agreement_Form.Rent_Amount;
                     tbl_Invoices.Tenant_Id = tbl_Agreement_Form.Tenant_Id;
                     tbl_Invoices.Tenant_Name = tbl_Agreement_Form.Tenant_Name;
+                    tbl_Invoices.Status = true;
+                    tbl_Invoices.IsDeleted = false;
+                    tbl_Invoices.AddedDate = DateTime.UtcNow;
+                    tbl_Invoices.AddedBy = GetCurrentUserAsync().Result.UserType;
                     _context.Tbl_Invoices.Add(tbl_Invoices);
                     _context.SaveChanges();
                     startDT = startDT.AddMonths(1);
@@ -272,6 +280,10 @@ namespace Property_Management_Sys.Controllers
                 tbl_Agreement_Form.Tenant_Name = Tenantname;
                 var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Builiding_Name).FirstOrDefault();
                 tbl_Agreement_Form.Builiding_Name = dd;
+                tbl_Agreement_Form.Status = true;
+                tbl_Agreement_Form.IsDeleted = false;
+                tbl_Agreement_Form.ModifiedDate = DateTime.UtcNow;
+                tbl_Agreement_Form.ModifiedBy = GetCurrentUserAsync().Result.UserType;
                 _context.Entry(tbl_Agreement_Form).State = EntityState.Modified;
                 _context.SaveChanges();
                 //delete invoice 
@@ -304,6 +316,10 @@ namespace Property_Management_Sys.Controllers
                     tbl_Invoices.Rent_Ammount = tbl_Agreement_Form.Rent_Amount;
                     tbl_Invoices.Tenant_Id = tbl_Agreement_Form.Tenant_Id;
                     tbl_Invoices.Tenant_Name = tbl_Agreement_Form.Tenant_Name;
+                    tbl_Invoices.Status = true;
+                    tbl_Invoices.IsDeleted = false;
+                    tbl_Invoices.ModifiedDate = DateTime.UtcNow;
+                    tbl_Invoices.ModifiedBy = GetCurrentUserAsync().Result.UserType;
                     _context.Tbl_Invoices.Add(tbl_Invoices);
                     _context.SaveChanges();
                     startDT = startDT.AddMonths(1);
@@ -331,7 +347,9 @@ namespace Property_Management_Sys.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Tbl_Agreement_Form tbl_Agreement_Form = _context.Tbl_Agreement_Form.Find(id);
-            _context.Tbl_Agreement_Form.Remove(tbl_Agreement_Form);
+            tbl_Agreement_Form.IsDeleted = true;
+            _context.Entry(tbl_Agreement_Form).State = EntityState.Modified;
+            _context.Tbl_Agreement_Form.Update(tbl_Agreement_Form);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
