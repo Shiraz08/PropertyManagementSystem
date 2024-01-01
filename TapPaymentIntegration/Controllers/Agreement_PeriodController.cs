@@ -63,7 +63,7 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                tbl_Agreement_Period.Agreement_Period_DateTime = DateTime.Now;
+                tbl_Agreement_Period.Agreement_Period_DateTime = DateTime.UtcNow;
                 _context.Tbl_Agreement_Period.Add(tbl_Agreement_Period);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

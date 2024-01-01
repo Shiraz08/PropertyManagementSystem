@@ -35,7 +35,7 @@ namespace Property_Management_Sys.Controllers
         // GET: Tenant
         public ActionResult Index()
         {
-            return View(_context.AppTenant.ToList());
+            return View(_context.AppTenant.Where(x=>x.IsDeleted == false && x.Status == true).ToList());
         }
         public static string FirstCharToUpper(string input)
         {
@@ -64,11 +64,14 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                tbl_Tenant.AddedDate = DateTime.Now;
                 var names = FirstCharToUpper(tbl_Tenant.TenantName);
                 tbl_Tenant.TenantName = names;
                 tbl_Tenant.TenantName = names;
                 tbl_Tenant.TenantPropertyName = tbl_Tenant.TenantPropertyName;
+                tbl_Tenant.Status = true;
+                tbl_Tenant.IsDeleted = false;
+                tbl_Tenant.AddedDate = DateTime.UtcNow;
+                tbl_Tenant.AddedBy = GetCurrentUserAsync().Result.UserType;
                 _context.AppTenant.Add(tbl_Tenant);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -100,6 +103,10 @@ namespace Property_Management_Sys.Controllers
             {
                 var names = FirstCharToUpper(tbl_Tenant.TenantName);
                 tbl_Tenant.TenantName = names;
+                tbl_Tenant.TenantName = names;
+                tbl_Tenant.TenantPropertyName = tbl_Tenant.TenantPropertyName;
+                tbl_Tenant.ModifiedDate= DateTime.UtcNow;
+                tbl_Tenant.ModifiedBy = GetCurrentUserAsync().Result.UserType;
                 _context.Entry(tbl_Tenant).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,7 +135,9 @@ namespace Property_Management_Sys.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             AppTenant tbl_Tenant = _context.AppTenant.Find(id);
-            _context.AppTenant.Remove(tbl_Tenant);
+            tbl_Tenant.IsDeleted = true;
+            _context.Entry(tbl_Tenant).State = EntityState.Modified;
+            _context.AppTenant.Update(tbl_Tenant);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

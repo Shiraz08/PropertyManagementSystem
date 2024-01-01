@@ -205,7 +205,7 @@ namespace Property_Management_Sys.Controllers
             if (ModelState.IsValid)
             {
                 //code for save form
-                tbl_Agreement_Form.Agreement_Form_DateTime = DateTime.Now.Date;
+                tbl_Agreement_Form.Agreement_Form_DateTime = DateTime.UtcNow.Date;
                 var landlordname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Agreement_Form.Landlord_Id).Select(x => x.Landlord_Name).FirstOrDefault();
                 var Tenantname = _context.Tbl_Tenant.Where(x => x.Tenant_Id == tbl_Agreement_Form.Tenant_Id).Select(x => x.Tenant_Name).FirstOrDefault();
                 tbl_Agreement_Form.Landlord_Name = landlordname;
@@ -226,7 +226,7 @@ namespace Property_Management_Sys.Controllers
                 {
                     Tbl_Invoices tbl_Invoices = new Tbl_Invoices();
                     tbl_Invoices.Agreement_Form_Id =Convert.ToInt32(max_form_id);
-                    tbl_Invoices.Invoice_Created_Date = DateTime.Now;
+                    tbl_Invoices.Invoice_Created_Date = DateTime.UtcNow;
                     tbl_Invoices.Invoice_Date = startDT;
                     tbl_Invoices.Invoice_Paid =false;
                     tbl_Invoices.Invoice_Paid_To_Landlord = false;
@@ -265,7 +265,7 @@ namespace Property_Management_Sys.Controllers
             if (ModelState.IsValid)
             {
                 //edit data save in _context
-                tbl_Agreement_Form.Agreement_Form_DateTime = DateTime.Now.Date;
+                tbl_Agreement_Form.Agreement_Form_DateTime = DateTime.UtcNow.Date;
                 var landlordname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Agreement_Form.Landlord_Id).Select(x => x.Landlord_Name).FirstOrDefault();
                 var Tenantname = _context.Tbl_Tenant.Where(x => x.Tenant_Id == tbl_Agreement_Form.Tenant_Id).Select(x => x.Tenant_Name).FirstOrDefault();
                 tbl_Agreement_Form.Landlord_Name = landlordname;
@@ -295,7 +295,7 @@ namespace Property_Management_Sys.Controllers
                 {
                     Tbl_Invoices tbl_Invoices = new Tbl_Invoices();
                     tbl_Invoices.Agreement_Form_Id = Convert.ToInt32(max_form_id);
-                    tbl_Invoices.Invoice_Created_Date = DateTime.Now;
+                    tbl_Invoices.Invoice_Created_Date = DateTime.UtcNow;
                     tbl_Invoices.Invoice_Date = startDT;
                     tbl_Invoices.Invoice_Paid = false;
                     tbl_Invoices.Invoice_Paid_To_Landlord = false;

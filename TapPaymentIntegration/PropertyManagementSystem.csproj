@@ -8,7 +8,6 @@
   <ItemGroup>
     <Content Remove="Views\AppTenant\Create.cshtml" />
     <Content Remove="Views\AppTenant\Delete.cshtml" />
-    <Content Remove="Views\AppTenant\Details.cshtml" />
     <Content Remove="Views\AppTenant\Edit.cshtml" />
     <Content Remove="Views\AppTenant\Index.cshtml" />
   </ItemGroup>
@@ -61,7 +60,6 @@
     <None Include="Views\Agreement_Form\Index.cshtml" />
     <None Include="Views\AppTenant\Create.cshtml" />
     <None Include="Views\AppTenant\Delete.cshtml" />
-    <None Include="Views\AppTenant\Details.cshtml" />
     <None Include="Views\AppTenant\Edit.cshtml" />
     <None Include="Views\AppTenant\Index.cshtml" />
     <None Include="Views\Landlord\Create.cshtml" />

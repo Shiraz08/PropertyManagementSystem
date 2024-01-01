@@ -34,7 +34,7 @@ namespace Property_Management_Sys.Controllers
         // GET: Landlord
         public ActionResult Index()
         {
-            return View(_context.Tbl_Landlord.OrderByDescending(x=>x.Landlord_Id).ToList());
+            return View(_context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.Landlord_Id).ToList());
         }
 
         // GET: Landlord/Details/5
@@ -67,10 +67,14 @@ namespace Property_Management_Sys.Controllers
             {
                 Random generator = new Random();
                 String r = generator.Next(0, 1000000).ToString("D6");
-                tbl_Landlord.Landlord_Datetime = DateTime.Now;
+                tbl_Landlord.Landlord_Datetime = DateTime.UtcNow;
                 tbl_Landlord.Landlord_Unique_No = r;
                 var names = FirstCharToUpper(tbl_Landlord.Landlord_Name);
                 tbl_Landlord.Landlord_Name = names;
+                tbl_Landlord.Status = true;
+                tbl_Landlord.IsDeleted = false;
+                tbl_Landlord.AddedDate = DateTime.UtcNow;
+                tbl_Landlord.AddedBy = GetCurrentUserAsync().Result.UserName;
                 _context.Tbl_Landlord.Add(tbl_Landlord);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -105,6 +109,10 @@ namespace Property_Management_Sys.Controllers
             {
                 var names = FirstCharToUpper(tbl_Landlord.Landlord_Name);
                 tbl_Landlord.Landlord_Name = names;
+                tbl_Landlord.Status = true;
+                tbl_Landlord.IsDeleted = false;
+                tbl_Landlord.ModifiedDate = DateTime.UtcNow;
+                tbl_Landlord.ModifiedBy = GetCurrentUserAsync().Result.UserName;
                 _context.Entry(tbl_Landlord).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -133,7 +141,9 @@ namespace Property_Management_Sys.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Tbl_Landlord tbl_Landlord = _context.Tbl_Landlord.Find(id);
-            _context.Tbl_Landlord.Remove(tbl_Landlord);
+            tbl_Landlord.IsDeleted = true;
+            _context.Entry(tbl_Landlord).State = EntityState.Modified;
+            _context.Tbl_Landlord.Update(tbl_Landlord);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

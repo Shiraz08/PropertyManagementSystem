@@ -89,7 +89,7 @@ namespace Property_Management_Sys.Controllers
                 {
                     HttpContext.Session.SetString("products", item.Landlord_Generate_Invoice_Extra);
                 }
-                    tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Datetime = DateTime.Now;
+                    tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Datetime = DateTime.UtcNow;
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Extra = HttpContext.Session.GetString("products");
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Amount = item.Landlord_Generate_Invoice_Amount;
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Description = item.Landlord_Generate_Invoice_Description;

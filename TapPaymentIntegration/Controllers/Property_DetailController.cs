@@ -71,7 +71,7 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                tbl_Property_Detail.Pro_Detail_Datetime = DateTime.Now;
+                tbl_Property_Detail.Pro_Detail_Datetime = DateTime.UtcNow;
                 var getname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Property_Detail.LanLoadrd_Id).Select(x => x.Landlord_Name).FirstOrDefault();
                 tbl_Property_Detail.LanLoadrd_Name = getname;
                 var names = FirstCharToUpper(tbl_Property_Detail.Builiding_Name);
@@ -109,7 +109,7 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                tbl_Property_Detail.Pro_Detail_Datetime = DateTime.Now;
+                tbl_Property_Detail.Pro_Detail_Datetime = DateTime.UtcNow;
                 var getname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Property_Detail.LanLoadrd_Id).Select(x => x.Landlord_Name).FirstOrDefault();
                 tbl_Property_Detail.LanLoadrd_Name = getname;
                 var names = FirstCharToUpper(tbl_Property_Detail.Builiding_Name);
