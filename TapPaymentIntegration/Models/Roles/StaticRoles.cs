@@ -64,35 +64,35 @@ namespace Property_Management_Sys.Models
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "Pass@123");
-                    await userManager.AddToRoleAsync(defaultUser, Roles.SuperAdmin.ToString());
-                    var id = roleManager.Roles.Where(x => x.Name == Roles.SuperAdmin.ToString()).Select(x => x.Id).FirstOrDefault();
-                    ClaimsListViewModel cla = new ClaimsListViewModel();
+                    //await userManager.AddToRoleAsync(defaultUser, Roles.SuperAdmin.ToString());
+                    //var id = roleManager.Roles.Where(x => x.Name == Roles.SuperAdmin.ToString()).Select(x => x.Id).FirstOrDefault();
+                    //ClaimsListViewModel cla = new ClaimsListViewModel();
 
-                    List<ClaimsListViewModel> inputData = new List<ClaimsListViewModel>();
+                    //List<ClaimsListViewModel> inputData = new List<ClaimsListViewModel>();
 
-                    // going through collection from which I want to copy
-                    foreach (var parameter in AllClaims)
-                    {
-                        inputData.Add(new ClaimsListViewModel() { IsSelected = true, ClaimsType = parameter.Value });
-                    }
-                    claimsViewModel.RoleId = id;
-                    claimsViewModel.ClaimsList = inputData;
+                    //// going through collection from which I want to copy
+                    //foreach (var parameter in AllClaims)
+                    //{
+                    //    inputData.Add(new ClaimsListViewModel() { IsSelected = true, ClaimsType = parameter.Value });
+                    //}
+                    //claimsViewModel.RoleId = id;
+                    //claimsViewModel.ClaimsList = inputData;
 
-                    var Role = await roleManager.FindByIdAsync(claimsViewModel.RoleId);
-                    if (Role.Id != "" && Role.Id != null)
-                    {
-                        IList<Claim> cl = await roleManager.GetClaimsAsync(Role);
-                        for (var i = 0; i < cl.Count; i++)
-                        {
-                            var result = await roleManager.RemoveClaimAsync(Role, cl[i]);
-                        }
+                    //var Role = await roleManager.FindByIdAsync(claimsViewModel.RoleId);
+                    //if (Role.Id != "" && Role.Id != null)
+                    //{
+                    //    IList<Claim> cl = await roleManager.GetClaimsAsync(Role);
+                    //    for (var i = 0; i < cl.Count; i++)
+                    //    {
+                    //        var result = await roleManager.RemoveClaimAsync(Role, cl[i]);
+                    //    }
 
-                        foreach (var item in claimsViewModel.ClaimsList.Where(c => c.IsSelected == true))
-                        {
-                            Claim c = new Claim(item.ClaimsType, item.ClaimsType);
-                            var r = await roleManager.AddClaimAsync(Role, c);
-                        }
-                    }
+                    //    foreach (var item in claimsViewModel.ClaimsList.Where(c => c.IsSelected == true))
+                    //    {
+                    //        Claim c = new Claim(item.ClaimsType, item.ClaimsType);
+                    //        var r = await roleManager.AddClaimAsync(Role, c);
+                    //    }
+                    //}
                 }
             }
         }

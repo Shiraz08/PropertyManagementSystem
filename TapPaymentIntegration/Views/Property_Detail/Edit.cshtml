@@ -48,7 +48,44 @@
                                 @Html.ValidationMessageFor(model => model.Complex_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PropertyDetailStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select class="form-control" name="@Model.PropertyDetailStatus" id="@Model.PropertyDetailStatus">
+                                    <option value=" ">Please Select Property Status</option>
+                                    <option value="Rented">Rented</option>
+                                    <option value="Reserved">Reserved</option>
+                                    <option value="On Sale">On Sale</option>
+                                    <option value="Sold">Sold</option>
+                                    <option value="Renovation">Renovation</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.PropertyDetailStatus, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select class="form-control" name="@Model.PropertyType" id="@Model.PropertyType">
+                                    <option value=" ">Please Select Property Type</option>
+                                    <option value="Residencial">Residencial</option>
+                                    <option value="Vacacional">Vacacional</option>
+                                    <option value="Habitacion">Habitacion</option>
+                                    <option value="Oficina">Oficina</option>
+                                    <option value="Local o nave">Local o nave</option>
+                                    <option value="Garaje">Garaje</option>
+                                    <option value="Trastero">Trastero</option>
+                                    <option value="Edificio">Edificio</option>
+                                    <option value="Terreno">Terreno</option>
+                                    <option value="Grupo">Grupo</option>
+                                    <option value="Coworking">Coworking</option>
+                                    <option value="Puesto">Puesto</option>
+                                    <option value="Sala">Sala</option>
+                                    <option value="Cama">Cama</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.PropertyType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Elec_Water_Acc_No, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">

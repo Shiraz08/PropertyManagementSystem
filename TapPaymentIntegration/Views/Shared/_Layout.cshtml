@@ -162,6 +162,7 @@
                                 var typeval = user.UserType.ToString();
                                 if (typeval == UserType.SuperAdmin)
                                 {
+                                    <hr />
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -201,6 +202,70 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Password</span>
+                                            </a>
+                                             <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangePassword","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Password</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                             </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Profile</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangeProfile","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Profile</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manager User</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("RegistrationAdmin","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("AdminUserList","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <hr />
+
+
+
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -373,6 +438,7 @@
                                             </ul>
                                         </li>
                                     </ul>
+
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -399,24 +465,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="@Url.Action("ChangePassword","Accounts")">
-                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Change Password</span>
-                                                
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="@Url.Action("ChangeProfile","Accounts")">
-                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Profile</span>
-                                                
-                                            </a>
-                                        </li>
-                                    </ul>
+
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -535,6 +584,66 @@
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manager User</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("TenantRegistration","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("TenantUserList","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Password</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangePassword","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Password</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Profile</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangeProfile","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Profile</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Agreement </span>
                                                 <span class="pcoded-mcaret"></span>
@@ -616,6 +725,40 @@
                                                     </a>
                                                 </li>
 
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Password</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangePassword","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Password</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Profile</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="@Url.Action("ChangeProfile","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Change Profile</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

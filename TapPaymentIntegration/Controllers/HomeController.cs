@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
@@ -199,6 +200,107 @@ namespace Property_Management_Sys.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
+                }
+            }
+            return View();
+        }
+
+        public ActionResult AdminUserList()
+        {
+            var list = _context.Users.Where(x => x.IsDeleted == false).AsNoTracking().ToList();
+            return View(list);
+        }
+        public ActionResult RegistrationAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegistrationAdmin(ApplicationUser model, string type)
+        {
+            if (ModelState.IsValid)
+            {
+                var getapptenantinfo = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.AppTenantId)).FirstOrDefault();
+                var defaultUser = new ApplicationUser
+                {
+                    UserName = model.Email.Split('@')[0],
+                    Email = model.Email,
+                    FullName = model.Email.Split('@')[0],
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    UserType = type,
+                    Status = true,
+                    Password = model.Password,
+                    IsDeleted = false,
+                    AddedBy = "ByDefault",
+                    AddedDate = DateTime.UtcNow,
+                    AppTenantId = getapptenantinfo.TenantId.ToString(),
+                    AppTenantName = getapptenantinfo.TenantName,
+                    PropertyName = getapptenantinfo.TenantPropertyName
+                };
+                IdentityResult result = await _userManager.CreateAsync(defaultUser, defaultUser.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("AdminUserList", "Home");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult TenantUserList()
+        {
+            var list = _context.Users.Where(x => x.IsDeleted == false).AsNoTracking().ToList();
+            return View(list);
+        }
+        
+        public ActionResult DeleteAdminUser(string id)
+        {
+            var list = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+            list.IsDeleted = true;
+            _context.Update(list);
+            _context.SaveChanges();
+            return RedirectToAction("AdminUserList");
+        }
+        public ActionResult DeleteTenantUser(string id)
+        {
+            var list = _context.Users.Where(x => x.Id == id).FirstOrDefault();
+            list.IsDeleted = true;
+            _context.Update(list);
+            _context.SaveChanges();
+            return RedirectToAction("TenantUserList");
+        }
+        public ActionResult TenantRegistration()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> TenantRegistration(ApplicationUser model, string type)
+        {
+            if (ModelState.IsValid)
+            {
+                var getapptenantinfo = _context.AppTenant.Where(x => x.TenantId == Convert.ToInt32(model.AppTenantId)).FirstOrDefault();
+                var defaultUser = new ApplicationUser
+                {
+                    UserName = model.Email.Split('@')[0],
+                    Email = model.Email,
+                    FullName = model.Email.Split('@')[0],
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    UserType = type,
+                    Status = true,
+                    Password = model.Password,
+                    IsDeleted = false,
+                    AddedBy = "ByDefault",
+                    AddedDate = DateTime.UtcNow,
+                    AppTenantId = getapptenantinfo.TenantId.ToString(),
+                    AppTenantName = getapptenantinfo.TenantName,
+                    PropertyName = getapptenantinfo.TenantPropertyName
+                };
+                IdentityResult result = await _userManager.CreateAsync(defaultUser, defaultUser.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("TenantUserList", "Home");
                 }
             }
             return View();

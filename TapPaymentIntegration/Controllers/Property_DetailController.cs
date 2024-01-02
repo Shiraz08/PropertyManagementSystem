@@ -35,7 +35,7 @@ namespace Property_Management_Sys.Controllers
         // GET: Property_Detail
         public ActionResult Index()
         {
-            var val = _context.Tbl_Property_Detail.OrderByDescending(x=>x.LanLoadrd_Id).ToList();
+            var val = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.LanLoadrd_Id).ToList();
             return View(val);
         }
         public static string FirstCharToUpper(string input)
@@ -62,9 +62,6 @@ namespace Property_Management_Sys.Controllers
             return View();
         }
 
-        // POST: Property_Detail/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Tbl_Property_Detail tbl_Property_Detail)
@@ -76,6 +73,10 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.LanLoadrd_Name = getname;
                 var names = FirstCharToUpper(tbl_Property_Detail.Builiding_Name);
                 tbl_Property_Detail.Builiding_Name = names;
+                tbl_Property_Detail.Status = true;
+                tbl_Property_Detail.IsDeleted = false;
+                tbl_Property_Detail.AddedDate = DateTime.UtcNow;
+                tbl_Property_Detail.AddedBy = GetCurrentUserAsync().Result.UserName;
                 _context.Tbl_Property_Detail.Add(tbl_Property_Detail);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,6 +115,10 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.LanLoadrd_Name = getname;
                 var names = FirstCharToUpper(tbl_Property_Detail.Builiding_Name);
                 tbl_Property_Detail.Builiding_Name = names;
+                tbl_Property_Detail.Status = true;
+                tbl_Property_Detail.IsDeleted = false;
+                tbl_Property_Detail.ModifiedDate = DateTime.UtcNow;
+                tbl_Property_Detail.ModifiedBy = GetCurrentUserAsync().Result.UserName;
                 _context.Entry(tbl_Property_Detail).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
