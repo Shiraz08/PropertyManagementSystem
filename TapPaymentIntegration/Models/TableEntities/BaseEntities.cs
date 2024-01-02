@@ -2,6 +2,7 @@
 {
     public class BaseEntities
     {
+        public int AppTenantId { get; set; }
         public bool Status { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime AddedDate { get; set; }

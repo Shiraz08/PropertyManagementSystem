@@ -7,6 +7,7 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Controllers
 {
@@ -34,7 +35,21 @@ namespace Property_Management_Sys.Controllers
         // GET: Tbl_Invoices
         public ActionResult Index()
         {
-            return View(_context.Tbl_Invoices.OrderByDescending(x=>x.Invoice_Id).ToList());
+            List<Tbl_Invoices> list = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                list = _context.Tbl_Invoices.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Invoice_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                list = _context.Tbl_Invoices.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Invoice_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                list = _context.Tbl_Invoices.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Invoice_Id).AsNoTracking().ToList();
+            }
+            return View(list);
         }
 
         // GET: Tbl_Invoices/Details/5
@@ -67,6 +82,11 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
+                tbl_Invoices.Status = true;
+                tbl_Invoices.IsDeleted = false;
+                tbl_Invoices.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
+                tbl_Invoices.AddedDate = DateTime.UtcNow;
+                tbl_Invoices.AddedBy = GetCurrentUserAsync().Result.Id;
                 _context.Tbl_Invoices.Add(tbl_Invoices);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,6 +119,11 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
+                tbl_Invoices.Status = true;
+                tbl_Invoices.IsDeleted = false;
+                tbl_Invoices.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
+                tbl_Invoices.ModifiedDate = DateTime.UtcNow;
+                tbl_Invoices.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 _context.Entry(tbl_Invoices).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

@@ -7,6 +7,7 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Controllers
 {
@@ -34,7 +35,21 @@ namespace Property_Management_Sys.Controllers
         // GET: Landlord
         public ActionResult Index()
         {
-            return View(_context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.Landlord_Id).ToList());
+            List<Tbl_Landlord> list = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                list = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                list = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                list = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
+            return View(list);
         }
 
         // GET: Landlord/Details/5
@@ -75,6 +90,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Landlord.IsDeleted = false;
                 tbl_Landlord.AddedDate = DateTime.UtcNow;
                 tbl_Landlord.AddedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Tbl_Landlord.Add(tbl_Landlord);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -113,6 +129,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Landlord.IsDeleted = false;
                 tbl_Landlord.ModifiedDate = DateTime.UtcNow;
                 tbl_Landlord.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Landlord).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

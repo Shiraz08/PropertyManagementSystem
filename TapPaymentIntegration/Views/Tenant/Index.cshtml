@@ -57,11 +57,11 @@
                                                 @{
                                                     var typeval = user.UserType.ToString();
                                                     if (typeval == UserType.SuperAdmin)
-                                                {
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Tenant_Id })
+                                                { 
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Tenant_Id }) |
 
                                                 }
-                                            } |
+                                            } 
                                             @Html.ActionLink("Delete", "Delete", new { id = item.Tenant_Id })
                                         </td>
                                     </tr>

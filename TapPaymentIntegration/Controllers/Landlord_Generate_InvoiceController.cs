@@ -39,11 +39,11 @@ namespace Property_Management_Sys.Controllers
         {
             var id = Convert.ToInt32(Landlord_Generate_Invoice_Extra);
             ViewBag.Landlord_Generate_Invoice_Extra = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
-            ViewBag.Landlordinfo = _context.Tbl_Landlord.ToList();
+            ViewBag.Landlordinfo = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).AsNoTracking().ToList();
 
             if(Landlord_Generate_Invoice_Extra != "")
             {
-                var ss = _context.Tbl_Landlord_Generate_Invoice.Where(x => x.Landlord_Generate_Invoice_Extra == Landlord_Generate_Invoice_Extra).OrderByDescending(x => x.Landlord_Generate_Invoice_Id).ToList();
+                var ss = _context.Tbl_Landlord_Generate_Invoice.Where(x => x.Landlord_Generate_Invoice_Extra == Landlord_Generate_Invoice_Extra && x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Landlord_Generate_Invoice_Id).AsNoTracking().ToList();
                 return View(ss);
 
             }
@@ -94,9 +94,13 @@ namespace Property_Management_Sys.Controllers
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Amount = item.Landlord_Generate_Invoice_Amount;
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Description = item.Landlord_Generate_Invoice_Description;
                     tbl_Landlord_Generate_Invoice.Landlord_Generate_Invoice_Total = sum.ToString();
+                    tbl_Landlord_Generate_Invoice.Status = true;
+                    tbl_Landlord_Generate_Invoice.IsDeleted = false;
+                    tbl_Landlord_Generate_Invoice.AddedDate = DateTime.UtcNow;
+                    tbl_Landlord_Generate_Invoice.AddedBy = GetCurrentUserAsync().Result.UserName;
+                    tbl_Landlord_Generate_Invoice.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                     _context.Tbl_Landlord_Generate_Invoice.Add(tbl_Landlord_Generate_Invoice);
-                    _context.SaveChanges();
-                
+                    _context.SaveChanges(); 
             }
             HttpContext.Session.SetString("products", null);
             return Json(true);
@@ -128,6 +132,11 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
+                tbl_Landlord_Generate_Invoice.Status = true;
+                tbl_Landlord_Generate_Invoice.IsDeleted = false;
+                tbl_Landlord_Generate_Invoice.ModifiedDate = DateTime.UtcNow;
+                tbl_Landlord_Generate_Invoice.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord_Generate_Invoice.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Landlord_Generate_Invoice).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

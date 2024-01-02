@@ -8,6 +8,7 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Controllers
 {
@@ -35,8 +36,21 @@ namespace Property_Management_Sys.Controllers
         // GET: Property_Detail
         public ActionResult Index()
         {
-            var val = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.LanLoadrd_Id).ToList();
-            return View(val);
+            List<Tbl_Property_Detail> list = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                list = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                list = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                list = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            return View(list);
         }
         public static string FirstCharToUpper(string input)
         {
@@ -77,6 +91,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.AddedDate = DateTime.UtcNow;
                 tbl_Property_Detail.AddedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Property_Detail.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Tbl_Property_Detail.Add(tbl_Property_Detail);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,6 +134,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.ModifiedDate = DateTime.UtcNow;
                 tbl_Property_Detail.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Property_Detail.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Property_Detail).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
