@@ -17,7 +17,7 @@ namespace Property_Management_Sys.Models.Email
                 client.UseDefaultCredentials = false;
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Credentials = new NetworkCredential("AKIA4A4DJ4EYADB5UFHL", "BCUESNHERw+nBq1gi+cjB+F5myPhCcIwfQKl59X0uFdK");
+                client.Credentials = new NetworkCredential("info@allsolace.com", "BCUESNHERw+nBq1gi+cjB+F5myPhCcIwfQKl59X0uFdK");
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("accounts@tamarran.com", "Tamarran");
@@ -26,9 +26,7 @@ namespace Property_Management_Sys.Models.Email
                     mail.To.Add(new MailAddress(address));
                 }
                 mail.Subject = subject;
-                mail.IsBodyHtml = true;
-                mail.CC.Add(new MailAddress("accounts@tamarran.com"));  
-                mail.Bcc.Add(new MailAddress("ali.zayer@tamarran.com")); 
+                mail.IsBodyHtml = true; 
                 mail.Body = message;
                 mail.Attachments.Add(new Attachment(new MemoryStream(bytesArray), "Invoice.pdf"));
                 client.Send(mail);
@@ -43,30 +41,21 @@ namespace Property_Management_Sys.Models.Email
         {
             try
             {
-                SmtpClient client = new SmtpClient();
-                client.Host = "email-smtp.ap-south-1.amazonaws.com";
-                client.Port = 587;
-                client.UseDefaultCredentials = false;
-                client.EnableSsl = true;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Credentials = new NetworkCredential("AKIA4A4DJ4EYADB5UFHL", "BCUESNHERw+nBq1gi+cjB+F5myPhCcIwfQKl59X0uFdK");
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("accounts@tamarran.com", "Tamarran");
-                foreach (var address in emails.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    mail.To.Add(new MailAddress(address));
-                }
-                mail.Subject = subject;
-                mail.IsBodyHtml = true;
-                mail.CC.Add(new MailAddress("accounts@tamarran.com")); //Adding CC email Id  
-                mail.Bcc.Add(new MailAddress("ali.zayer@tamarran.com"));  //Adding BCC email Id 
-                mail.Body = message;
-                client.Send(mail);
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("info@allsolace.com", "?Q3WFVWuxBce%Y$");
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("info@allsolace.com");
+                mailMessage.To.Add(emails);
+                mailMessage.Subject = subject;
+                mailMessage.Body = message;
+                smtpClient.Send(mailMessage);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                // log exception
+
+                throw;
             }
             await Task.CompletedTask;
         }

@@ -3,21 +3,31 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Property_Management_Sys.Areas.Identity.Data;
+using Property_Management_Sys.Data;
 using Property_Management_Sys.Models.Email;
 using Property_Management_Sys.Models.Roles;
 
 namespace Property_Management_Sys.Controllers
 {
-    [Authorize]
+ 
     public class AccountsController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<Agreement_FormController> _logger;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private TapPaymentIntegrationContext _context;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private IWebHostEnvironment _environment;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         EmailSender _emailSender = new EmailSender();
-        public AccountsController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountsController(IWebHostEnvironment Environment, ILogger<Agreement_FormController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, TapPaymentIntegrationContext context, IUserStore<ApplicationUser> userStore)
         {
-            _userManager = userManager;
+            _logger = logger;
             _signInManager = signInManager;
+            _userManager = userManager;
+            _context = context;
+            _userStore = userStore;
+            _environment = Environment;
         }
 
         #region Identity
@@ -103,7 +113,8 @@ namespace Property_Management_Sys.Controllers
                 }
                 return View();
             }
-
+            user.Password = change.NewPassword;
+            _context.Users.Update(user);
             await _signInManager.RefreshSignInAsync(user);
             ModelState.AddModelError(string.Empty, "Your password has been changed.");
             return View();
@@ -111,7 +122,10 @@ namespace Property_Management_Sys.Controllers
         [Authorize]
         public IActionResult ChangeProfile()
         {
-            return View();
+            UpdateProfile updateProfile = new UpdateProfile();
+            updateProfile.Email = GetCurrentUserAsync().Result.Email;
+            updateProfile.PhoneNumber = GetCurrentUserAsync().Result.PhoneNumber;
+            return View(updateProfile);
         }
         [Authorize]
         [HttpPost]
@@ -120,6 +134,7 @@ namespace Property_Management_Sys.Controllers
             var user = await _userManager.GetUserAsync(User);
             user.Email = change.Email;
             user.PhoneNumber = change.PhoneNumber;
+            user.NormalizedEmail = change.Email;
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -141,26 +156,32 @@ namespace Property_Management_Sys.Controllers
         }
         #endregion
         #region Accounts Page
+        [Authorize]
         public ActionResult Rents()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Asset_expenses()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Supplies()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Deposits()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Banks()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Billing()
         {
             return View();
