@@ -117,7 +117,7 @@ namespace Property_Management_Sys.Areas.Identity.Pages.Account
                 var u = _userManager.Users.Where(x => x.Email == Input.Email && x.Status == true).FirstOrDefault();
                 if(u != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(u.UserName.ToString(), Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                    var result = await _signInManager.PasswordSignInAsync(u.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");

@@ -96,7 +96,7 @@ namespace Property_Management_Sys.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "UserType_Id", "UserType_Name", tbl_Property_Detail.LanLoadrd_Id);
+            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
             return View(tbl_Property_Detail);
         }
 
@@ -112,7 +112,7 @@ namespace Property_Management_Sys.Controllers
             {
                 return NotFound();
             }
-            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "UserType_Id", "UserType_Name", tbl_Property_Detail.LanLoadrd_Id);
+            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
             return View(tbl_Property_Detail);
         }
 
@@ -139,7 +139,7 @@ namespace Property_Management_Sys.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "UserType_Id", "UserType_Name", tbl_Property_Detail.LanLoadrd_Id);
+            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
             return View(tbl_Property_Detail);
         }
 

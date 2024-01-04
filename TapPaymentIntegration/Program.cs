@@ -9,7 +9,6 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
-using Microsoft.Owin.Security.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PropertyContextConnection") ?? throw new InvalidOperationException("Connection string 'PropertyContextConnection' not found.");
@@ -47,13 +46,6 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 //builder.Services.AddHangfireServer();
 //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-var googleAuth = builder.Configuration.GetSection("Authentication:Google");
-var google = new GoogleOAuth2AuthenticationOptions()
-{
-    ClientId = googleAuth["ClientId"],
-    ClientSecret = googleAuth["ClientSecret"],
-    Provider = new GoogleOAuth2AuthenticationProvider()
-};
 
 
 builder.Services.AddAuthentication()

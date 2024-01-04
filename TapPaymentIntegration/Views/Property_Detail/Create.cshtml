@@ -19,7 +19,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Building_No, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Building_No, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Building_No, new { htmlAttributes = new { @class = "form-control" , required="required"} })
                                 @Html.ValidationMessageFor(model => model.Building_No, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Builiding_Name, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Builiding_Name, new { htmlAttributes = new { @class = "form-control", @id = "Builiding_Name" } })
+                                @Html.EditorFor(model => model.Builiding_Name, new { htmlAttributes = new { @class = "form-control", @id = "Builiding_Name" , required="required"} })
                                 @Html.ValidationMessageFor(model => model.Builiding_Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -35,8 +35,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PropertyDetailStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <select class="form-control" name="@Model.PropertyDetailStatus" id="@Model.PropertyDetailStatus">
-                                    <option value=" ">Please Select Property Status</option>
+                                <select class="form-control" name="PropertyDetailStatus" id="PropertyDetailStatus" required >
+                                    <option value="">Please Select Property Status</option>
                                     <option value="Rented">Rented</option>
                                     <option value="Reserved">Reserved</option>
                                     <option value="On Sale">On Sale</option>
@@ -50,8 +50,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <select class="form-control" name="@Model.PropertyType" id="@Model.PropertyType">
-                                    <option value=" ">Please Select Property Type</option>
+                                <select class="form-control" name="PropertyType" id="PropertyType" required>
+                                    <option value="">Please Select Property Type</option>
                                     <option value="Residencial">Residencial</option>
                                     <option value="Vacacional">Vacacional</option>
                                     <option value="Habitacion">Habitacion</option>
@@ -104,7 +104,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.LanLoadrd_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("LanLoadrd_Id", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("LanLoadrd_Id", null, "Please Select LanLoard",htmlAttributes: new { @class = "form-control", required="required" })
                                 @Html.ValidationMessageFor(model => model.LanLoadrd_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
