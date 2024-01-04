@@ -474,7 +474,7 @@
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
                                                 <span class="pcoded-micon"><i class="ti-hand-point-up"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Accounts</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Accounting</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                             <ul class="pcoded-submenu">
@@ -690,6 +690,60 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-hand-point-up"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Accounting</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Rents","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Rents</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Asset_expenses","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Asset Expenses</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Supplies","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Supplies</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Deposits","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Deposits</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Banks","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Banks</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Billing","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Billing</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 }
                                 else if (typeval == UserType.User)
                                 {
@@ -823,6 +877,60 @@
                                                     <a href="@Url.Action("ViewRentDetails","Report")">
                                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Rent Details</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-hand-point-up"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Accounting</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Rents","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Rents</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Asset_expenses","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Asset Expenses</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Supplies","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Supplies</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Deposits","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Deposits</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Banks","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Banks</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@Url.Action("Billing","Accounts")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Billing</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
