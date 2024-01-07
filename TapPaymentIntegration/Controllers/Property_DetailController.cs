@@ -90,7 +90,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.Status = true;
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.AddedDate = DateTime.UtcNow;
-                tbl_Property_Detail.AddedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Property_Detail.AddedBy = GetCurrentUserAsync().Result.Id;
                 tbl_Property_Detail.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Tbl_Property_Detail.Add(tbl_Property_Detail);
                 _context.SaveChanges();
@@ -133,7 +133,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.Status = true;
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.ModifiedDate = DateTime.UtcNow;
-                tbl_Property_Detail.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Property_Detail.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 tbl_Property_Detail.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Property_Detail).State = EntityState.Modified;
                 _context.SaveChanges();

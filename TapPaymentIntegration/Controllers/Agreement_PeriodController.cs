@@ -6,6 +6,7 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Controllers
 {
@@ -33,7 +34,21 @@ namespace Property_Management_Sys.Controllers
         // GET: Agreement_Period
         public ActionResult Index()
         {
-            return View(_context.Tbl_Agreement_Period.ToList());
+            List<Tbl_Agreement_Period> list = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                list = _context.Tbl_Agreement_Period.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Agreement_Period_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                list = _context.Tbl_Agreement_Period.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Agreement_Period_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                list = _context.Tbl_Agreement_Period.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Agreement_Period_Id).AsNoTracking().ToList();
+            }
+            return View(list);
         }
 
         // GET: Agreement_Period/Details/5
@@ -64,6 +79,10 @@ namespace Property_Management_Sys.Controllers
             if (ModelState.IsValid)
             {
                 tbl_Agreement_Period.Agreement_Period_DateTime = DateTime.UtcNow;
+                tbl_Agreement_Period.Status = true;
+                tbl_Agreement_Period.IsDeleted = false;
+                tbl_Agreement_Period.ModifiedDate = DateTime.UtcNow;
+                tbl_Agreement_Period.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 _context.Tbl_Agreement_Period.Add(tbl_Agreement_Period);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

@@ -97,7 +97,7 @@ namespace Property_Management_Sys.Controllers
                     tbl_Landlord_Generate_Invoice.Status = true;
                     tbl_Landlord_Generate_Invoice.IsDeleted = false;
                     tbl_Landlord_Generate_Invoice.AddedDate = DateTime.UtcNow;
-                    tbl_Landlord_Generate_Invoice.AddedBy = GetCurrentUserAsync().Result.UserName;
+                    tbl_Landlord_Generate_Invoice.AddedBy = GetCurrentUserAsync().Result.Id;
                     tbl_Landlord_Generate_Invoice.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                     _context.Tbl_Landlord_Generate_Invoice.Add(tbl_Landlord_Generate_Invoice);
                     _context.SaveChanges(); 
@@ -135,7 +135,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Landlord_Generate_Invoice.Status = true;
                 tbl_Landlord_Generate_Invoice.IsDeleted = false;
                 tbl_Landlord_Generate_Invoice.ModifiedDate = DateTime.UtcNow;
-                tbl_Landlord_Generate_Invoice.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord_Generate_Invoice.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 tbl_Landlord_Generate_Invoice.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Landlord_Generate_Invoice).State = EntityState.Modified;
                 _context.SaveChanges();

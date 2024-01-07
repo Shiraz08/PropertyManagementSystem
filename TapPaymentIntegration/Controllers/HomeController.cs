@@ -249,7 +249,7 @@ namespace Property_Management_Sys.Controllers
 
         public ActionResult TenantUserList()
         {
-            var list = _context.Users.Where(x => x.IsDeleted == false).AsNoTracking().ToList();
+            var list = _context.Users.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == GetCurrentUserAsync().Result.AppTenantId).OrderByDescending(x => x.AddedDate).AsNoTracking().ToList();
             return View(list);
         }
         

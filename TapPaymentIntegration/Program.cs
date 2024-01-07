@@ -46,8 +46,6 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 //builder.Services.AddHangfireServer();
 //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
-
 builder.Services.AddAuthentication()
     .AddGoogle("google", opt =>
     {

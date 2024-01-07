@@ -132,7 +132,7 @@ namespace Property_Management_Sys.Areas.Identity.Pages.Account
                 else
                 {
                    
-                    ModelState.AddModelError(string.Empty, u == null ? "Your are Blocked By Admin, Please Contact Admin." : "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, u == null ? "Your Email Is not Found, Please Contact Admin." : "Invalid login attempt.");
                     return Page();
                 }
             }

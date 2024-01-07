@@ -89,7 +89,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Landlord.Status = true;
                 tbl_Landlord.IsDeleted = false;
                 tbl_Landlord.AddedDate = DateTime.UtcNow;
-                tbl_Landlord.AddedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord.AddedBy = GetCurrentUserAsync().Result.Id;
                 tbl_Landlord.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Tbl_Landlord.Add(tbl_Landlord);
                 _context.SaveChanges();
@@ -128,7 +128,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Landlord.Status = true;
                 tbl_Landlord.IsDeleted = false;
                 tbl_Landlord.ModifiedDate = DateTime.UtcNow;
-                tbl_Landlord.ModifiedBy = GetCurrentUserAsync().Result.UserName;
+                tbl_Landlord.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 tbl_Landlord.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Entry(tbl_Landlord).State = EntityState.Modified;
                 _context.SaveChanges();

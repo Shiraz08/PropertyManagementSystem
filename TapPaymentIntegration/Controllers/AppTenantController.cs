@@ -71,7 +71,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Tenant.Status = true;
                 tbl_Tenant.IsDeleted = false;
                 tbl_Tenant.AddedDate = DateTime.UtcNow;
-                tbl_Tenant.AddedBy = GetCurrentUserAsync().Result.UserType;
+                tbl_Tenant.AddedBy = GetCurrentUserAsync().Result.Id;
                 _context.AppTenant.Add(tbl_Tenant);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -108,7 +108,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Tenant.Status = true;
                 tbl_Tenant.IsDeleted = false;
                 tbl_Tenant.ModifiedDate= DateTime.UtcNow;
-                tbl_Tenant.ModifiedBy = GetCurrentUserAsync().Result.UserType;
+                tbl_Tenant.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 _context.Entry(tbl_Tenant).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction("Index");

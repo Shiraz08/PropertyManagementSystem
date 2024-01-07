@@ -64,7 +64,7 @@
                 console.log(response);
                 $('#AppTenantId').html('');
                 var options = '';
-                options += '<option value = " " > Select App Tenant </option>';
+                options += '<option value = "" > Select App Tenant </option>';
                 for (var i = 0; i < response.length; i++) {
                     options += '<option value ="' + response[i].Text + '">' + response[i].Value + ' </option>';
                 }

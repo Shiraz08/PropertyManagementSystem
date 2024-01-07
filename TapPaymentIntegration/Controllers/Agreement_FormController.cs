@@ -215,7 +215,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Agreement_Form.Status = true;
                 tbl_Agreement_Form.IsDeleted = false;
                 tbl_Agreement_Form.AddedDate = DateTime.UtcNow;
-                tbl_Agreement_Form.AddedBy = GetCurrentUserAsync().Result.UserType;
+                tbl_Agreement_Form.AddedBy = GetCurrentUserAsync().Result.Id;
                 _context.Tbl_Agreement_Form.Add(tbl_Agreement_Form);
                 _context.SaveChanges();
                 //code for generate invoices
@@ -242,7 +242,7 @@ namespace Property_Management_Sys.Controllers
                     tbl_Invoices.Status = true;
                     tbl_Invoices.IsDeleted = false;
                     tbl_Invoices.AddedDate = DateTime.UtcNow;
-                    tbl_Invoices.AddedBy = GetCurrentUserAsync().Result.UserType;
+                    tbl_Invoices.AddedBy = GetCurrentUserAsync().Result.Id;
                     _context.Tbl_Invoices.Add(tbl_Invoices);
                     _context.SaveChanges();
                     startDT = startDT.AddMonths(1);
@@ -283,7 +283,7 @@ namespace Property_Management_Sys.Controllers
                 tbl_Agreement_Form.Status = true;
                 tbl_Agreement_Form.IsDeleted = false;
                 tbl_Agreement_Form.ModifiedDate = DateTime.UtcNow;
-                tbl_Agreement_Form.ModifiedBy = GetCurrentUserAsync().Result.UserType;
+                tbl_Agreement_Form.ModifiedBy = GetCurrentUserAsync().Result.Id;
                 _context.Entry(tbl_Agreement_Form).State = EntityState.Modified;
                 _context.SaveChanges();
                 //delete invoice 
@@ -319,7 +319,7 @@ namespace Property_Management_Sys.Controllers
                     tbl_Invoices.Status = true;
                     tbl_Invoices.IsDeleted = false;
                     tbl_Invoices.ModifiedDate = DateTime.UtcNow;
-                    tbl_Invoices.ModifiedBy = GetCurrentUserAsync().Result.UserType;
+                    tbl_Invoices.ModifiedBy = GetCurrentUserAsync().Result.Id;
                     _context.Tbl_Invoices.Add(tbl_Invoices);
                     _context.SaveChanges();
                     startDT = startDT.AddMonths(1);

@@ -263,9 +263,6 @@
                                         </li>
                                     </ul>
                                     <hr />
-
-
-
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -442,7 +439,6 @@
                                             </ul>
                                         </li>
                                     </ul>
-
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -469,7 +465,6 @@
                                             </ul>
                                         </li>
                                     </ul>
-
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -527,90 +522,7 @@
                                 }
                                 else if (typeval == UserType.AppTenant)
                                 {
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Home Tenant</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("Create","Tenant")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Tenant</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Property Detail</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("Create","Property_Detail")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Property Detail</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-hand-point-up"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Landlord</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("Create","Landlord")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Landlord</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manager User</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("TenantRegistration","Home")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add User</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-                                                <li class=" ">
-                                                    <a href="@Url.Action("TenantUserList","Home")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View User</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                    <hr />
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -648,7 +560,171 @@
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manager User</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("TenantRegistration","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("TenantUserList","Home")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View User</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <hr />
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Home Tenant</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Create","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-desktop"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Property Detail</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Create","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Property Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Property Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Propert Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Propert Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-hand-point-up"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Landlord</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Create","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                @{
+                                                    if (typeval == UserType.SuperAdmin)
+                                                    {
+                                                        <li class=" ">
+                                                            <a href="@Url.Action("Create","Landlord_Generate_Invoice")">
+                                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create Landlord Invoices</span>
+                                                                <span class="pcoded-mcaret"></span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class=" ">
+                                                            <a href="@Url.Action("Index","Landlord_Generate_Invoice")">
+                                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Landlord Invoices</span>
+                                                                <span class="pcoded-mcaret"></span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-folder"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Agreement </span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
@@ -656,11 +732,31 @@
                                                 <li class="">
                                                     <a href="@Url.Action("Create","Agreement_Form")">
                                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Agreement </span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Agreement</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
-
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -747,45 +843,7 @@
                                 }
                                 else if (typeval == UserType.User)
                                 {
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Home Tenant</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("Create","Tenant")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Tenant</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="pcoded-item pcoded-left-item">
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Property Detail</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <li class="">
-                                                    <a href="@Url.Action("Create","Property_Detail")">
-                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Property Detail</span>
-                                                        <span class="pcoded-mcaret"></span>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                    <hr />
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -820,6 +878,85 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <hr />
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Home Tenant</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Create","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Tenant")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Tenant</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-desktop"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Property Detail</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="@Url.Action("Create","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Property Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Property Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Propert Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Property_Detail")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Propert Detail</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
@@ -835,14 +972,54 @@
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Landlord")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Landlord</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                @{
+                                                    if (typeval == UserType.SuperAdmin)
+                                                    {
+                                                        <li class=" ">
+                                                            <a href="@Url.Action("Create","Landlord_Generate_Invoice")">
+                                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create Landlord Invoices</span>
+                                                                <span class="pcoded-mcaret"></span>
+                                                            </a>
+                                                        </li>
 
+                                                        <li class=" ">
+                                                            <a href="@Url.Action("Index","Landlord_Generate_Invoice")">
+                                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Landlord Invoices</span>
+                                                                <span class="pcoded-mcaret"></span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                     </ul>
                                     <ul class="pcoded-item pcoded-left-item">
                                         <li class="pcoded-hasmenu">
                                             <a href="javascript:void(0)">
-                                                <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                                <span class="pcoded-micon"><i class="ti-folder"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Agreement </span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
@@ -850,11 +1027,31 @@
                                                 <li class="">
                                                     <a href="@Url.Action("Create","Agreement_Form")">
                                                         <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Agreement </span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Agreement</span>
                                                         <span class="pcoded-mcaret"></span>
                                                     </a>
                                                 </li>
-
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Edit Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="@Url.Action("Index","Agreement_Form")">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">View Agreement </span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
