@@ -64,8 +64,8 @@ namespace Property_Management_Sys.Controllers
         {
             var ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
-                            where N.Builiding_Name.StartsWith(Prefix)
-                            select new { N.Builiding_Name });
+                            where N.Basic_Builiding_Name.StartsWith(Prefix)
+                            select new { N.Basic_Builiding_Name });
             return Json(CityList);
         }
         
@@ -126,12 +126,12 @@ namespace Property_Management_Sys.Controllers
         {
 
             var _val = Convert.ToInt32(vals);
-            var response = _context.Tbl_Property_Detail.Where(x => x.LanLoadrd_Id == _val).Select(x => new SelectListItem { Text = x.Building_No.ToString(), Value = x.Builiding_Name.ToString() }).ToList();
+            var response = _context.Tbl_Property_Detail.Where(x => x.LanLoadrd_Id == _val).Select(x => new SelectListItem { Text = x.Basic_Builiding_Name.ToString(), Value = x.Basic_Builiding_Name.ToString() }).ToList();
             return Json(response);
         }
         public ActionResult Pro_Detailgetdata(string vals)
         {
-            var response = _context.Tbl_Property_Detail.Where(x => x.Building_No == vals).FirstOrDefault();
+            var response = _context.Tbl_Property_Detail.Where(x => x.Basic_Builiding_Name == vals).FirstOrDefault();
             return Json(response);
         }
         public ActionResult Tenantgetdata(string vals)
@@ -210,7 +210,7 @@ namespace Property_Management_Sys.Controllers
                 var Tenantname = _context.Tbl_Tenant.Where(x => x.Tenant_Id == tbl_Agreement_Form.Tenant_Id).Select(x => x.Tenant_Name).FirstOrDefault();
                 tbl_Agreement_Form.Landlord_Name = landlordname;
                 tbl_Agreement_Form.Tenant_Name = Tenantname;
-                var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Builiding_Name).FirstOrDefault();
+                var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Basic_Builiding_Name).FirstOrDefault();
                 tbl_Agreement_Form.Builiding_Name = dd;
                 tbl_Agreement_Form.Status = true;
                 tbl_Agreement_Form.IsDeleted = false;
@@ -278,7 +278,7 @@ namespace Property_Management_Sys.Controllers
                 var Tenantname = _context.Tbl_Tenant.Where(x => x.Tenant_Id == tbl_Agreement_Form.Tenant_Id).Select(x => x.Tenant_Name).FirstOrDefault();
                 tbl_Agreement_Form.Landlord_Name = landlordname;
                 tbl_Agreement_Form.Tenant_Name = Tenantname;
-                var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Builiding_Name).FirstOrDefault();
+                var dd = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == tbl_Agreement_Form.Pro_Detail_Id).Select(x => x.Basic_Builiding_Name).FirstOrDefault();
                 tbl_Agreement_Form.Builiding_Name = dd;
                 tbl_Agreement_Form.Status = true;
                 tbl_Agreement_Form.IsDeleted = false;

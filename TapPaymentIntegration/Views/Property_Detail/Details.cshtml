@@ -18,72 +18,7 @@
                         </div>
                         <div class="card-block table-border-style">
                             <div class="table-responsive">
-                                <table class="table" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.Building_No)
-                                            </th>
-                                            <th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.Builiding_Name)
-                                            </th>
-                                            <th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.LanLoadrd_Name)
-                                            </th>
-                                            <th style="text-align:center!important">
-                                                <span>Unit No</span>
-                                            </th>
-                                            <th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.Elec_Water_Acc_No)
-                                            </th>
-                                            <th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.Water_Acc_NO)
-                                            </th>
-                                            @*<th style="text-align:center!important">
-                                                    @Html.DisplayNameFor(model => model.Pro_Detail_Datetime)
-                                                </th>*@
-                                            <th style="text-align:center!important">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr style="text-align:center!important">
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Building_No)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Builiding_Name)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.LanLoadrd_Name)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Apt_Villa_No)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Elec_Water_Acc_No)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Water_Acc_NO)
-                                                </td>
-                                                @*<td>
-                                                        @Html.DisplayFor(modelItem => item.Pro_Detail_Datetime)
-                                                    </td>*@
-                                                <td>
-                                                    @*@{ var typeval = Session["UserType"].ToString();
-                                                        if (typeval == "1")
-                                                        {
-                                                            @Html.ActionLink("Edit", "Edit", new { id = item.Pro_Detail_Id })
-
-                                                        }
-                                                    } |*@
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Pro_Detail_Id })
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
-	var user = await UserManager.GetUserAsync(User);
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <link href="~/adminpage/css/helper.css" rel="stylesheet">
@@ -18,97 +18,97 @@
         <div class="main-body">
             <div class="page-body">
                 <div class="bs-example">
-                <div class="card">
+                    <div class="card">
                         <div class="clearfix">
                             <a href="@Url.Action("Create","Property_Detail")" class="btn btn-warning float-right ml-2">Add New Property</a>
                         </div>
-                    <div class="card-block table-border-style">
-                        <div class="table-responsive">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.Building_No)
-                                        </th>
-                                        <th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.Builiding_Name)
-                                        </th>
-                                        <th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.LanLoadrd_Name)
-                                        </th>
-                                        <th style="text-align:center!important">
-                                            <span>Unit No</span>
-                                        </th>
-                                        <th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.PropertyType)
-                                        </th>
-                                        <th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.PropertyDetailStatus)
-                                        </th>
-                                        @*<th style="text-align:center!important">
-                                                @Html.DisplayNameFor(model => model.Pro_Detail_Datetime)
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Basic_Building_No)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Basic_Builiding_Name)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.LanLoadrd_Name)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                <span>Unit No</span>
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Basic_PropertyType)
+                                            </th>
+                                            <th style="text-align:center!important">
+                                                @Html.DisplayNameFor(model => model.Asset_status_PropertyDetailStatus)
+                                            </th>
+                                            @*<th style="text-align:center!important">
+                                            @Html.DisplayNameFor(model => model.Pro_Detail_Datetime)
                                             </th>*@
-                                        <th style="text-align:center!important">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.GroupBy(m => m.Builiding_Name).Select(g => g.First()))
-                                    {
-                                        <tr style="text-align:center!important">
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Building_No)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Builiding_Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.LanLoadrd_Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Apt_Villa_No)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PropertyType)
-                                            </td>
-                                            <td>
-                                                    @Html.DisplayFor(modelItem => item.PropertyDetailStatus)
-                                            </td>
-                                            @*<td>
-                                                    @Html.DisplayFor(modelItem => item.Pro_Detail_Datetime)
-                                                </td>*@
-                                            <td>
-                                                @{
-                                                    var typeval = user.UserType.ToString();
-                                                    if (typeval == UserType.SuperAdmin)
-                                                    {
-                                                        @Html.ActionLink("Edit", "Edit", new { id = item.Pro_Detail_Id })
-
-                                                    }
-                                                } |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.Pro_Detail_Id })|
-                                                @Html.ActionLink("See Building Info", "Details", new { id = item.LanLoadrd_Id })
-                                            </td>
+                                            <th style="text-align:center!important">Action</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.GroupBy(m => m.Basic_Builiding_Name).Select(g => g.First()))
+                                        {
+                                            <tr style="text-align:center!important">
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Basic_Building_No)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Basic_Builiding_Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LanLoadrd_Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Basic_Apt_Villa_No)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Basic_PropertyType)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Asset_status_PropertyDetailStatus)
+                                                </td>
+                                                @*<td>
+                                            @Html.DisplayFor(modelItem => item.Pro_Detail_Datetime)
+                                            </td>*@
+                                                <td>
+                                                    @{
+                                                        var typeval = user.UserType.ToString();
+                                                        if (typeval == UserType.SuperAdmin)
+                                                        {
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.Pro_Detail_Id })
+
+                                                        }
+                                                    } |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Pro_Detail_Id })|
+                                                    @Html.ActionLink("See Building Info", "Details", new { id = item.LanLoadrd_Id })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
-<script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
-<script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-<script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>
+    <script src="~/adminpage/js/lib/jquery/jquery.min.js"></script>
+    <script src="~/adminpage/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="~/adminpage/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/datatables.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="~/adminpage/js/lib/datatables/datatables-init.js"></script>
 

@@ -3,121 +3,139 @@
 @{
     ViewBag.Title = "Create";
 }
+<link href="~/css/multitab.css" rel="stylesheet" />
+<style>
+    .main-body .page-wrapper {
+        padding: 0.3rem!important;
+        transition: all ease-in 0.3s;
+    }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12" >
+                            <div class="card px-0 pt-4 pb-0 mt-3 mb-3" style="padding-left: 53px!Important;padding-right: 53px!Important;">
+                                <h2 id="heading">Sign Up Your User Account</h2>
+                                <p>Fill all form field to go to next step</p>
 
-                    <div class="form-horizontal">
-                        <h4>Add Property Detail</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Building_No, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Building_No, new { htmlAttributes = new { @class = "form-control" , required="required"} })
-                                @Html.ValidationMessageFor(model => model.Building_No, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                                <form id="msform">
+                                    <!-- progressbar -->
+                                    <ul id="progressbar">
+                                        <li class="active" id="account"><strong>Account</strong></li>
+                                        <li id="personal"><strong>Personal</strong></li>
+                                        <li id="payment"><strong>Image</strong></li>
+                                        <li id="confirm"><strong>Finish</strong></li>
+                                    </ul>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <br>
+                                    <!-- fieldsets -->
+                                    <fieldset>
+                                        <div class="form-card">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="fs-title">Account Information:</h2>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h2 class="steps">Step 1 - 4</h2>
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Builiding_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Builiding_Name, new { htmlAttributes = new { @class = "form-control", @id = "Builiding_Name" , required="required"} })
-                                @Html.ValidationMessageFor(model => model.Builiding_Name, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label class="fieldlabels">Email: *</label>
+                                                    <input  type="email" name="email" placeholder="Email Id" />
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="fieldlabels">Username: *</label>
+                                                    <input type="text" name="uname" placeholder="UserName" />
+                                                </div>
+                                            </div>
+                                          
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PropertyDetailStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <select class="form-control" name="PropertyDetailStatus" id="PropertyDetailStatus" required >
-                                    <option value="">Please Select Property Status</option>
-                                    <option value="Rented">Rented</option>
-                                    <option value="Reserved">Reserved</option>
-                                    <option value="On Sale">On Sale</option>
-                                   <option value="Sold">Sold</option>
-                                    <option value="Renovation">Renovation</option>
-                               </select>
-                                @Html.ValidationMessageFor(model => model.PropertyDetailStatus, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <select class="form-control" name="PropertyType" id="PropertyType" required>
-                                    <option value="">Please Select Property Type</option>
-                                    <option value="Residencial">Residencial</option>
-                                    <option value="Vacacional">Vacacional</option>
-                                    <option value="Habitacion">Habitacion</option>
-                                    <option value="Oficina">Oficina</option>
-                                    <option value="Local o nave">Local o nave</option>
-                                    <option value="Garaje">Garaje</option>
-                                    <option value="Trastero">Trastero</option>
-                                    <option value="Edificio">Edificio</option>
-                                    <option value="Terreno">Terreno</option>
-                                    <option value="Grupo">Grupo</option>
-                                    <option value="Coworking">Coworking</option>
-                                    <option value="Puesto">Puesto</option>
-                                    <option value="Sala">Sala</option>
-                                    <option value="Cama">Cama</option>
-                               </select>
-                                @Html.ValidationMessageFor(model => model.PropertyType, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Apt_Villa_No, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Apt_Villa_No, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Apt_Villa_No, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Complex_No, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Complex_No, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Complex_No, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Elec_Water_Acc_No, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Elec_Water_Acc_No, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Elec_Water_Acc_No, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Water_Acc_NO, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Water_Acc_NO, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Water_Acc_NO, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LanLoadrd_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("LanLoadrd_Id", null, "Please Select LanLoard",htmlAttributes: new { @class = "form-control", required="required" })
-                                @Html.ValidationMessageFor(model => model.LanLoadrd_Id, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
+                                            <label class="fieldlabels">Password: *</label>
+                                            <input type="password" name="pwd" placeholder="Password" />
+                                            <label class="fieldlabels">Confirm Password: *</label>
+                                            <input type="password" name="cpwd" placeholder="Confirm Password" />
+                                        </div>
+                                        <input type="button" name="next" class="next action-button" value="Next" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-card">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="fs-title">Personal Information:</h2>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h2 class="steps">Step 2 - 4</h2>
+                                                </div>
+                                            </div>
+                                            <label class="fieldlabels">First Name: *</label>
+                                            <input type="text" name="fname" placeholder="First Name" />
+                                            <label class="fieldlabels">Last Name: *</label>
+                                            <input type="text" name="lname" placeholder="Last Name" />
+                                            <label class="fieldlabels">Contact No.: *</label>
+                                            <input type="text" name="phno" placeholder="Contact No." />
+                                            <label class="fieldlabels">Alternate Contact No.: *</label>
+                                            <input type="text" name="phno_2" placeholder="Alternate Contact No." />
+                                        </div>
+                                        <input type="button" name="next" class="next action-button" value="Next" />
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-card">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="fs-title">Image Upload:</h2>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h2 class="steps">Step 3 - 4</h2>
+                                                </div>
+                                            </div>
+                                            <label class="fieldlabels">Upload Your Photo:</label>
+                                            <input type="file" name="pic" accept="image/*">
+                                            <label class="fieldlabels">Upload Signature Photo:</label>
+                                            <input type="file" name="pic" accept="image/*">
+                                        </div>
+                                        <input type="button" name="next" class="next action-button" value="Submit" />
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-card">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="fs-title">Finish:</h2>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h2 class="steps">Step 4 - 4</h2>
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
+                                            <br>
+                                            <div class="row justify-content-center">
+                                                <div class="col-3">
+                                                    <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
+                                                </div>
+                                            </div>
+                                            <br><br>
+                                            <div class="row justify-content-center">
+                                                <div class="col-7 text-center">
+                                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         </div>
     </div>
@@ -125,9 +143,80 @@
 
 <script>
     $(document).ready(function () {
-        $("#Builiding_Name").keyup(function () {
-            $('#Builiding_Name').css('textTransform', 'capitalize');
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
+        var current = 1;
+        var steps = $("fieldset").length;
+
+        setProgressBar(current);
+
+        $(".next").click(function () {
+
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            //Add Class Active
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    next_fs.css({ 'opacity': opacity });
+                },
+                duration: 500
+            });
+            setProgressBar(++current);
         });
+
+        $(".previous").click(function () {
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            //Remove class active
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
+                    // for making fielset appear animation
+                    opacity = 1 - now;
+
+                    current_fs.css({
+                        'display': 'none',
+                        'position': 'relative'
+                    });
+                    previous_fs.css({ 'opacity': opacity });
+                },
+                duration: 500
+            });
+            setProgressBar(--current);
+        });
+
+        function setProgressBar(curStep) {
+            var percent = parseFloat(100 / steps) * curStep;
+            percent = percent.toFixed();
+            $(".progress-bar")
+                .css("width", percent + "%")
+        }
+
+        $(".submit").click(function () {
+            return false;
+        })
+
     });
 </script>  
 
