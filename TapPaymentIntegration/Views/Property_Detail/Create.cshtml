@@ -6,7 +6,7 @@
 <link href="~/css/multitab.css" rel="stylesheet" />
 <style>
     .main-body .page-wrapper {
-        padding: 0.3rem!important;
+        padding: 0.3rem !important;
         transition: all ease-in 0.3s;
     }
 </style>
@@ -19,7 +19,7 @@
             <div class="page-wrapper">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <div class="col-lg-12" >
+                        <div class="col-lg-12">
                             <div class="card px-0 pt-4 pb-0 mt-3 mb-3" style="padding-left: 53px!Important;padding-right: 53px!Important;">
                                 <h2 id="heading">Add Asset/Property</h2>
                                 <p>Fill all form field to go to next step</p>
@@ -50,7 +50,7 @@
                                             </div>
 
                                             <div class="row">
-                                                
+
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Basic_Building_No, htmlAttributes: new { @class = "control-label col-md-5" })
                                                     @Html.EditorFor(model => model.Basic_Building_No, new { htmlAttributes = new { @class = "form-control" } })
@@ -443,7 +443,7 @@
                                                     }, new { @class = "form-control" })
                                                     @Html.ValidationMessageFor(model => model.Address_Region, "", new { @class = "text-danger" })
                                                 </div>
-                                                 <div class="col-6">
+                                                <div class="col-6">
                                                     @Html.LabelFor(model => model.Address_Locality, htmlAttributes: new { @class = "control-label col-md-5" })
                                                     @Html.EditorFor(model => model.Address_Locality, new { htmlAttributes = new { @class = "form-control" } })
                                                     @Html.ValidationMessageFor(model => model.Address_Locality, "", new { @class = "text-danger" })
@@ -507,7 +507,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                              
+
                                                 <div class="col-12">
                                                     @Html.LabelFor(model => model.Cadastraldata_Cadastralreference, htmlAttributes: new { @class = "control-label col-md-5" })
                                                     @Html.EditorFor(model => model.Cadastraldata_Cadastralreference, new { htmlAttributes = new { @class = "form-control" } })
@@ -515,33 +515,34 @@
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Currency, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <select id="Cadastraldata_Currency" name="Cadastraldata_Currency" class="form-control">
-                                                        <option value="">Please Select Currency</option>
-                                                        <option value="€">€</option>
-                                                        <option value="$">$</option>
-                                                        <option value="£">£</option>
-                                                        <option value="SEK">SEK</option>
-                                                        <option value="NOK">NOK</option>
-                                                        <option value="DKK">DKK</option>
-                                                        <option value="CLP">CLP</option>
-                                                        <option value="CLF">CLF</option>
-                                                        <option value="ARS">ARS</option>
-                                                        <option value="AUD">AUD</option>
-                                                        <option value="BRL">BRL</option>
-                                                        <option value="COP">COP</option>
-                                                        <option value="COU">COU</option>
-                                                        <option value="CRC">CRC</option>
-                                                        <option value="SVC">SVC</option>
-                                                        <option value="GTQ">GTQ</option>
-                                                        <option value="MXN">MXN</option>
-                                                        <option value="MXV">MXV</option>
-                                                        <option value="NIO">NIO</option>
-                                                        <option value="PYG">PYG</option>
-                                                        <option value="PEN">PEN</option>
-                                                        <option value="VEF">VEF</option>
-                                                        <option value="FCFA">FCFA</option>
-                                                        <option value="aed">aed</option>
-                                                    </select>
+                                                    @Html.DropDownList("Cadastraldata_Currency", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem { Text = "Please Select Currency", Value = "" },
+                                                    new SelectListItem { Text = "€", Value = "€" },
+                                                    new SelectListItem { Text = "$", Value = "$" },
+                                                    new SelectListItem { Text = "£", Value = "£" },
+                                                    new SelectListItem { Text = "SEK", Value = "SEK" },
+                                                    new SelectListItem { Text = "NOK", Value = "NOK" },
+                                                    new SelectListItem { Text = "DKK", Value = "DKK" },
+                                                    new SelectListItem { Text = "CLP", Value = "CLP" },
+                                                    new SelectListItem { Text = "CLF", Value = "CLF" },
+                                                    new SelectListItem { Text = "ARS", Value = "ARS" },
+                                                    new SelectListItem { Text = "AUD", Value = "AUD" },
+                                                    new SelectListItem { Text = "BRL", Value = "BRL" },
+                                                    new SelectListItem { Text = "COP", Value = "COP" },
+                                                    new SelectListItem { Text = "COU", Value = "COU" },
+                                                    new SelectListItem { Text = "CRC", Value = "CRC" },
+                                                    new SelectListItem { Text = "SVC", Value = "SVC" },
+                                                    new SelectListItem { Text = "GTQ", Value = "GTQ" },
+                                                    new SelectListItem { Text = "MXN", Value = "MXN" },
+                                                    new SelectListItem { Text = "MXV", Value = "MXV" },
+                                                    new SelectListItem { Text = "NIO", Value = "NIO" },
+                                                    new SelectListItem { Text = "PYG", Value = "PYG" },
+                                                    new SelectListItem { Text = "PEN", Value = "PEN" },
+                                                    new SelectListItem { Text = "VEF", Value = "VEF" },
+                                                    new SelectListItem { Text = "FCFA", Value = "FCFA" },
+                                                    new SelectListItem { Text = "aed", Value = "aed" }
+                                                    }, new { @class = "form-control",id="Cadastraldata_Currency" })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Currency, "", new { @class = "text-danger" })
                                                 </div>
 
@@ -630,11 +631,11 @@
                                                     <h2 class="steps">Step 3 - 4</h2>
                                                 </div>
                                             </div>
-                                             <div class="row">
+                                            <div class="row">
                                                 @Html.LabelFor(model => model.DocumentsFile, htmlAttributes: new { @class = "control-label col-md-5" })
                                                 <input type="file" name="DocumentsFile" id="DocumentsFile" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*">
                                                 @Html.ValidationMessageFor(model => model.DocumentsFile, "", new { @class = "text-danger" })
-                                                 </div>
+                                            </div>
                                             <br /><br /><br />
                                             <div class="row">
                                                 <div class="col-12">
@@ -708,7 +709,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $("#Address_Country").val("@Model.Address_Country.ToString()").trigger("chosen:updated");
+    });
+</script>
 <script>
     $(document).ready(function () {
 
@@ -784,7 +789,7 @@
 
 
     });
-</script>  
+</script>
 
 
 

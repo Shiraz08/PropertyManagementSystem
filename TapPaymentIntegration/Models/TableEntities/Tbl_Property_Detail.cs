@@ -164,6 +164,7 @@ namespace Property_Management_Sys.Models
         [NotMapped]
         [Display(Name = "Documents")]
         public IFormFile DocumentsFile { set; get; }
+        public string DocumentsFileName { set; get; }
 
 
 
@@ -177,5 +178,6 @@ namespace Property_Management_Sys.Models
         [NotMapped]
         [Display(Name = "Inventory file")]
         public IFormFile InventoryFile { set; get; }
+        public string InventoryFileName { set; get; }
     }
 }

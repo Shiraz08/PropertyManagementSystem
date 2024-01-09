@@ -42,9 +42,6 @@
                                             <th style="text-align:center!important">
                                                 @Html.DisplayNameFor(model => model.Asset_status_PropertyDetailStatus)
                                             </th>
-                                            @*<th style="text-align:center!important">
-                                            @Html.DisplayNameFor(model => model.Pro_Detail_Datetime)
-                                            </th>*@
                                             <th style="text-align:center!important">Action</th>
                                         </tr>
                                     </thead>
@@ -53,23 +50,21 @@
                                         {
                                             <tr style="text-align:center!important">
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Basic_Building_No)
+                                                  <a href="@Url.Action("Details", new { id = item.Pro_Detail_Id })"> @Html.DisplayFor(modelItem => item.Basic_Building_No)</a>
+                                                   
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Basic_Builiding_Name)
+                                                    <a href="@Url.Action("Details", new { id = item.Pro_Detail_Id })"> @Html.DisplayFor(modelItem => item.Basic_Builiding_Name)</a>
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.LanLoadrd_Name)
+                                                    <a href="@Url.Action("Details", new { id = item.Pro_Detail_Id })">   @Html.DisplayFor(modelItem => item.LanLoadrd_Name)</a>
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Basic_PropertyType)
+                                                    <a href="@Url.Action("Details", new { id = item.Pro_Detail_Id })"> @Html.DisplayFor(modelItem => item.Basic_PropertyType)</a>
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Asset_status_PropertyDetailStatus)
+                                                    <a href="@Url.Action("Details", new { id = item.Pro_Detail_Id })"> @Html.DisplayFor(modelItem => item.Asset_status_PropertyDetailStatus)</a>
                                                 </td>
-                                                @*<td>
-                                            @Html.DisplayFor(modelItem => item.Pro_Detail_Datetime)
-                                            </td>*@
                                                 <td>
                                                     @{
                                                         var typeval = user.UserType.ToString();
@@ -80,7 +75,7 @@
                                                         }
                                                     } |
                                                     @Html.ActionLink("Delete", "Delete", new { id = item.Pro_Detail_Id })|
-                                                    @Html.ActionLink("See Building Info", "Details", new { id = item.LanLoadrd_Id })
+                                                    @Html.ActionLink("Property Details", "Details", new { id = item.LanLoadrd_Id })
                                                 </td>
                                             </tr>
                                         }

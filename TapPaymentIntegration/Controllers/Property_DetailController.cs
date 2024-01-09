@@ -63,7 +63,7 @@ namespace Property_Management_Sys.Controllers
         {
             if (id != null)
             {
-                var val = _context.Tbl_Property_Detail.Where(x => x.LanLoadrd_Id == id).ToList();
+                var val = _context.Tbl_Property_Detail.Where(x => x.Pro_Detail_Id == id).ToList();
                 return View(val);
             }
             return View();
@@ -73,7 +73,9 @@ namespace Property_Management_Sys.Controllers
         public ActionResult Create()
         {
             ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
-            return View();
+            Tbl_Property_Detail tbl_Property_Detail = new Tbl_Property_Detail();
+            tbl_Property_Detail.Address_Country = "0";
+            return View(tbl_Property_Detail);
         }
 
         [HttpPost]
@@ -82,9 +84,34 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
+                string wwwPath = _environment.WebRootPath;
+                string contentPath = _environment.ContentRootPath;
+
+                string path = Path.Combine(_environment.WebRootPath, "UploadFiles");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                IFormFile doc_File = tbl_Property_Detail.DocumentsFile;
+                string fileName = Path.GetFileName(DateTime.UtcNow.Millisecond + doc_File.FileName);
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    doc_File.CopyTo(stream);
+                }
+
+                IFormFile inv_File = tbl_Property_Detail.InventoryFile;
+                string fileName2 = Path.GetFileName(DateTime.UtcNow.Millisecond + inv_File.FileName);
+                using (FileStream stream2 = new FileStream(Path.Combine(path, fileName2), FileMode.Create))
+                {
+                    inv_File.CopyTo(stream2);
+                }
+
+                var getname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Property_Detail.LanLoadrd_Id).Select(x => x.Landlord_Name).FirstOrDefault();
+                tbl_Property_Detail.LanLoadrd_Name = getname;
                 tbl_Property_Detail.Asset_data_Typeasset = "0";
-                tbl_Property_Detail.DocumentsFile = null;
-                tbl_Property_Detail.InventoryFile = null;
+                tbl_Property_Detail.DocumentsFileName = fileName;
+                tbl_Property_Detail.InventoryFileName = fileName2;
                 tbl_Property_Detail.Status = true;
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.AddedDate = DateTime.UtcNow;
@@ -96,6 +123,7 @@ namespace Property_Management_Sys.Controllers
                 ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
                 tbl_Property_Detail = null;
                 ViewBag.Status = true;
+                return RedirectToAction("Index");
             }
             else
             {
@@ -103,7 +131,6 @@ namespace Property_Management_Sys.Controllers
                 ViewBag.Status = false;
                 return View(tbl_Property_Detail);
             }
-            return View(tbl_Property_Detail);
         }
 
         // GET: Property_Detail/Edit/5
@@ -122,17 +149,57 @@ namespace Property_Management_Sys.Controllers
             return View(tbl_Property_Detail);
         }
 
-        // POST: Property_Detail/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Tbl_Property_Detail tbl_Property_Detail)
         {
             if (ModelState.IsValid)
             {
+                string wwwPath = _environment.WebRootPath;
+                string contentPath = _environment.ContentRootPath;
+
+                string path = Path.Combine(_environment.WebRootPath, "UploadFiles");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                string fileName = "";
+                 if (tbl_Property_Detail.DocumentsFile != null)
+                {
+                    IFormFile doc_File = tbl_Property_Detail.DocumentsFile;
+                    fileName = Path.GetFileName(DateTime.UtcNow.Millisecond + doc_File.FileName);
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        doc_File.CopyTo(stream);
+                    }
+                }
+                 else
+                {
+                    fileName = tbl_Property_Detail.DocumentsFileName;
+                }
+
+                string fileName2 = "";
+                if (tbl_Property_Detail.InventoryFile != null)
+                {
+                    IFormFile inv_File = tbl_Property_Detail.InventoryFile;
+                    fileName2 = Path.GetFileName(DateTime.UtcNow.Millisecond + inv_File.FileName);
+                    using (FileStream stream2 = new FileStream(Path.Combine(path, fileName2), FileMode.Create))
+                    {
+                        inv_File.CopyTo(stream2);
+                    }
+                }
+                else
+                {
+                    fileName2 = tbl_Property_Detail.InventoryFileName;
+                }
+
+
                 var getname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Property_Detail.LanLoadrd_Id).Select(x => x.Landlord_Name).FirstOrDefault();
                 tbl_Property_Detail.LanLoadrd_Name = getname;
+                tbl_Property_Detail.Asset_data_Typeasset = "0";
+                tbl_Property_Detail.DocumentsFileName = fileName;
+                tbl_Property_Detail.InventoryFileName = fileName2;
                 var names = FirstCharToUpper(tbl_Property_Detail.Basic_Builiding_Name);
                 tbl_Property_Detail.Basic_Builiding_Name = names;
                 tbl_Property_Detail.Status = true;
@@ -144,8 +211,12 @@ namespace Property_Management_Sys.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
-            return View(tbl_Property_Detail);
+            else
+            {
+                ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
+                ViewBag.Status = false;
+                return View(tbl_Property_Detail);
+            }
         }
 
         // GET: Property_Detail/Delete/5
