@@ -25,6 +25,7 @@ public class ApplicationUser : IdentityUser
     public string AddedBy { get; set; }
     public DateTime ModifiedDate { get; set; }
     public string ModifiedBy { get; set; }
+    public string countryCode { get; set; }
 
 }
 

@@ -11,5 +11,6 @@ namespace Property_Management_Sys.Models.Roles
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string countryCode { get; set; }
     }
 }

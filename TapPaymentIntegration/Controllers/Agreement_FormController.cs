@@ -11,6 +11,7 @@ using Property_Management_Sys.Areas.Identity.Data;
 using Property_Management_Sys.Data;
 using Property_Management_Sys.Models;
 using Property_Management_Sys.Models.Email;
+using Property_Management_Sys.Utility;
 
 namespace Property_Management_Sys.Controllers
 {
@@ -36,13 +37,40 @@ namespace Property_Management_Sys.Controllers
         }
         public ActionResult Index()
         {
-            return View(_context.Tbl_Agreement_Form.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x=>x.Agreement_Form_Id).ToList());
+            List<Tbl_Agreement_Form> list = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                list = _context.Tbl_Agreement_Form.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                list = _context.Tbl_Agreement_Form.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                list = _context.Tbl_Agreement_Form.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            return View(list);
         }
         [HttpPost]
         public JsonResult LandlordSuggestion(string Prefix)
         {
+            List<Tbl_Landlord> ObjList = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                ObjList = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                ObjList = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                ObjList = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Landlord_Id).AsNoTracking().ToList();
+            }
 
-            var ObjList = _context.Tbl_Landlord.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
                             where  N.Landlord_Name.Contains(Prefix.ToUpper())
                             select new { N.Landlord_Name, N.Landlord_Identiy_Card_No });
@@ -52,8 +80,21 @@ namespace Property_Management_Sys.Controllers
         [HttpPost]
         public JsonResult TenantSuggestion(string Prefix)
         {
+            List<Tbl_Tenant> ObjList = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                ObjList = _context.Tbl_Tenant.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Tenant_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                ObjList = _context.Tbl_Tenant.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Tenant_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                ObjList = _context.Tbl_Tenant.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Tenant_Id).AsNoTracking().ToList();
+            }
 
-            var ObjList = _context.Tbl_Tenant.Where(x => x.IsDeleted == false && x.Status == true).ToList();
             var CityList = (from N in ObjList
                             where N.Tenant_Name.StartsWith(Prefix.ToUpper())
                             select new { N.Tenant_Name, N.Tenant_Identity_Card });
@@ -62,7 +103,21 @@ namespace Property_Management_Sys.Controllers
         [HttpPost]
         public JsonResult Pro_DetailSuggestion(string Prefix)
         {
-            var ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).ToList();
+            List<Tbl_Property_Detail> ObjList = null;
+            var current_user = GetCurrentUserAsync().Result;
+            if (current_user.UserType == UserType.SuperAdmin)
+            {
+                ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.AppTenant)
+            {
+                ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true && x.AppTenantId == Convert.ToInt32(current_user.AppTenantId)).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+            else if (current_user.UserType == UserType.User)
+            {
+                ObjList = _context.Tbl_Property_Detail.Where(x => x.IsDeleted == false && x.Status == true && x.AddedBy == current_user.Id).OrderByDescending(x => x.Pro_Detail_Id).AsNoTracking().ToList();
+            }
+
             var CityList = (from N in ObjList
                             where N.Basic_Builiding_Name.StartsWith(Prefix)
                             select new { N.Basic_Builiding_Name });

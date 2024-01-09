@@ -164,7 +164,7 @@
                             </div>
                             @Html.LabelFor(model => model.Agreement_Period_From_DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.Agreement_Period_From_DateTime, new { htmlAttributes = new { @class = "form-control", @id = "fromdate", @autocomplete = "off", @onchange = "Agreement_Period_From_DateTimefun()", @placeholder = "Please Select Date" } })
+                                <input type="text" id="fromdate" name="Agreement_Period_From_DateTime"  class = "form-control"  autocomplete = "off"  onchange = "Agreement_Period_From_DateTimefun()" placeholder = "Please Select Date">
                                 @Html.ValidationMessageFor(model => model.Agreement_Period_From_DateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -172,7 +172,7 @@
                         <div class="row">
                             @Html.LabelFor(model => model.Agreement_Period_To_DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.Agreement_Period_To_DateTime, new { htmlAttributes = new { @class = "form-control", @id = "todate", @placeholder = "Please Select Date", @autocomplete = "off" } })
+                                <input type="text" id="todate" name="Agreement_Period_To_DateTime" class="form-control" autocomplete="off" placeholder="Please Select Date">
                                 @Html.ValidationMessageFor(model => model.Agreement_Period_To_DateTime, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.Rent_Amount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -464,7 +464,9 @@
     }
 </script>
 <script>
-    function Agreement_Period_From_DateTimefun() {
+    function Agreement_Period_From_DateTimefun() 
+    {
+        debugger
         var getdate = $("#fromdate").val();
         debugger
         var arr_dateText = getdate.split("/");

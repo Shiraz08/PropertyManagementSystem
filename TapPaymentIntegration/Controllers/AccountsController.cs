@@ -125,6 +125,7 @@ namespace Property_Management_Sys.Controllers
             UpdateProfile updateProfile = new UpdateProfile();
             updateProfile.Email = GetCurrentUserAsync().Result.Email;
             updateProfile.PhoneNumber = GetCurrentUserAsync().Result.PhoneNumber;
+            updateProfile.countryCode = GetCurrentUserAsync().Result.countryCode;
             return View(updateProfile);
         }
         [Authorize]
@@ -135,6 +136,7 @@ namespace Property_Management_Sys.Controllers
             user.Email = change.Email;
             user.PhoneNumber = change.PhoneNumber;
             user.NormalizedEmail = change.Email;
+            user.countryCode = change.countryCode;
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

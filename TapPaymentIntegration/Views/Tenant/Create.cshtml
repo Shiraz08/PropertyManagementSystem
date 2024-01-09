@@ -40,7 +40,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Tenant_Identity_Card, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Tenant_Identity_Card, new { htmlAttributes = new { @class = "form-control" , required="required", type="number"} })
+                                @Html.EditorFor(model => model.Tenant_Identity_Card, new { htmlAttributes = new { @class = "form-control" , required="required"} })
                                 @Html.ValidationMessageFor(model => model.Tenant_Identity_Card, "", new { @class = "text-danger" })
                             </div>
                         </div>
