@@ -22,19 +22,6 @@ namespace Property_Management_Sys.Models
         public string Basic_Builiding_Name { get; set; }
 
 
-
-        [Display(Name = "Apt Villa No")]
-        public string Basic_Apt_Villa_No { get; set; }
-
-
-        [Display(Name = "Complex No")]
-        public string Basic_Complex_No { get; set; }
-
-
-        [Display(Name = "Elec Acc No")]
-        public string Basic_Elec_Water_Acc_No { get; set; }
-
-
         [Required(ErrorMessage = "Lanlord Name is required")]
         public Nullable<int> LanLoadrd_Id { get; set; }
 
@@ -42,9 +29,6 @@ namespace Property_Management_Sys.Models
         [Display(Name = "Landlord Name")]
         public string LanLoadrd_Name { get; set; }
 
-
-        [Display(Name = "Water Acc No")]
-        public string Basic_Water_Acc_NO { get; set; }
 
 
         [Required(ErrorMessage = "Property Type is required")]
@@ -63,8 +47,7 @@ namespace Property_Management_Sys.Models
 
 
 
-        [Required(ErrorMessage = "Type asset is required")]
-        [Display(Name = "Type Asset")]
+       [Display(Name = "Type Asset")]
         public string Asset_data_Typeasset { get; set; }
 
 
@@ -171,7 +154,7 @@ namespace Property_Management_Sys.Models
 
         [Required(ErrorMessage = "Community expenses is required")]
         [Display(Name = "Community expenses")]
-        public DateTime Expenses_Communityexpenses { get; set; }
+        public string Expenses_Communityexpenses { get; set; }
 
 
         [Required(ErrorMessage = "Community expenses date is required")]
@@ -179,23 +162,19 @@ namespace Property_Management_Sys.Models
         public DateTime Expenses_Communityexpensesdate { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Documents is required")]
         [Display(Name = "Documents")]
         public IFormFile DocumentsFile { set; get; }
 
 
 
-        [Required(ErrorMessage = "Inventory Name is required")]
         [Display(Name = "Inventory Name")]
-        public int Inventory_Name { get; set; }
+        public string Inventory_Name { get; set; }
 
 
-        [Required(ErrorMessage = "Inventory Description is required")]
         [Display(Name = "Inventory Description")]
-        public int Inventory_Description { get; set; }
+        public string Inventory_Description { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Inventory file is required")]
         [Display(Name = "Inventory file")]
         public IFormFile InventoryFile { set; get; }
     }

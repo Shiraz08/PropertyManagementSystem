@@ -11,6 +11,8 @@
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -22,7 +24,7 @@
                                 <h2 id="heading">Add Asset/Property</h2>
                                 <p>Fill all form field to go to next step</p>
 
-                                <form id="msform">
+                                <form id="msform" asp-action="Create" asp-controller="Property_Detail" enctype="multipart/form-data" method="post" novalidate>
                                     <!-- progressbar -->
                                     <ul id="progressbar">
                                         <li class="active" id="account"><strong>Account</strong></li>
@@ -48,7 +50,7 @@
                                             </div>
 
                                             <div class="row">
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Basic_Building_No, htmlAttributes: new { @class = "control-label col-md-5" })
                                                     @Html.EditorFor(model => model.Basic_Building_No, new { htmlAttributes = new { @class = "form-control" } })
@@ -67,14 +69,15 @@
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Asset_status_PropertyDetailStatus, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <select class="form-control" name="Asset_status_PropertyDetailStatus" id="Asset_status_PropertyDetailStatus">
-                                                            <option value="">Please Select Property Status</option>
-                                                            <option value="Rented">Rented</option>
-                                                            <option value="Reserved">Reserved</option>
-                                                            <option value="On Sale">On Sale</option>
-                                                            <option value="Sold">Sold</option>
-                                                            <option value="Renovation">Renovation</option>
-                                                        </select>
+                                                    @Html.DropDownList("Asset_status_PropertyDetailStatus", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem { Text = "Please Select Property Status", Value = "" },
+                                                    new SelectListItem { Text = "Rented", Value = "Rented" },
+                                                    new SelectListItem { Text = "Reserved", Value = "Reserved" },
+                                                    new SelectListItem { Text = "On Sale", Value = "On Sale" },
+                                                    new SelectListItem { Text = "Sold", Value = "Sold" },
+                                                    new SelectListItem { Text = "Renovation", Value = "Renovation" }
+                                                    }, new { @class = "form-control" })
                                                     @Html.ValidationMessageFor(model => model.Asset_status_PropertyDetailStatus, "", new { @class = "text-danger" })
                                                 </div>
 
@@ -94,23 +97,24 @@
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Basic_PropertyType, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <select class="form-control" name="Basic_PropertyType" id="Basic_PropertyType" required>
-                                                        <option value="">Please Select Property Type</option>
-                                                        <option value="Residencial">Residencial</option>
-                                                        <option value="Vacacional">Vacacional</option>
-                                                        <option value="Habitacion">Habitacion</option>
-                                                        <option value="Oficina">Oficina</option>
-                                                        <option value="Local o nave">Local o nave</option>
-                                                        <option value="Garaje">Garaje</option>
-                                                        <option value="Trastero">Trastero</option>
-                                                        <option value="Edificio">Edificio</option>
-                                                        <option value="Terreno">Terreno</option>
-                                                        <option value="Grupo">Grupo</option>
-                                                        <option value="Coworking">Coworking</option>
-                                                        <option value="Puesto">Puesto</option>
-                                                        <option value="Sala">Sala</option>
-                                                        <option value="Cama">Cama</option>
-                                                    </select>
+                                                    @Html.DropDownList("Basic_PropertyType", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem { Text = "Please Select Property Type", Value = "" },
+                                                    new SelectListItem { Text = "Residencial", Value = "Residencial" },
+                                                    new SelectListItem { Text = "Vacacional", Value = "Vacacional" },
+                                                    new SelectListItem { Text = "Habitacion", Value = "Habitacion" },
+                                                    new SelectListItem { Text = "Oficina", Value = "Oficina" },
+                                                    new SelectListItem { Text = "Local o nave", Value = "Local o nave" },
+                                                    new SelectListItem { Text = "Garaje", Value = "Garaje" },
+                                                    new SelectListItem { Text = "Trastero", Value = "Trastero" },
+                                                    new SelectListItem { Text = "Edificio", Value = "Edificio" },
+                                                    new SelectListItem { Text = "Terreno", Value = "Terreno" },
+                                                    new SelectListItem { Text = "Grupo", Value = "Grupo" },
+                                                    new SelectListItem { Text = "Coworking", Value = "Coworking" },
+                                                    new SelectListItem { Text = "Puesto", Value = "Puesto" },
+                                                    new SelectListItem { Text = "Sala", Value = "Sala" },
+                                                    new SelectListItem { Text = "Cama", Value = "Cama" }
+                                                    }, new { @class = "form-control", required = "required" })
                                                     @Html.ValidationMessageFor(model => model.Basic_PropertyType, "", new { @class = "text-danger" })
                                                 </div>
 
@@ -381,61 +385,62 @@
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Address_Region, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <select id="Address_Region" class="form-control" name="Address_Region">
-                                                        <option value="">Please Select Region</option>
-                                                        <option value="Álava">Álava</option>
-                                                        <option value="Albacete">Albacete</option>
-                                                        <option value="Alicante">Alicante</option>
-                                                        <option value="Almería">Almería</option>
-                                                        <option value="Asturias">Asturias</option>
-                                                        <option value="Ávila">Ávila</option>
-                                                        <option value="Badajoz">Badajoz</option>
-                                                        <option value="Barcelona">Barcelona</option>
-                                                        <option value="Burgos">Burgos</option>
-                                                        <option value="Cáceres">Cáceres</option>
-                                                        <option value="Cádiz">Cádiz</option>
-                                                        <option value="Cantabria">Cantabria</option>
-                                                        <option value="Castellón">Castellón</option>
-                                                        <option value="Ceuta">Ceuta</option>
-                                                        <option value="Ciudad Real">Ciudad Real</option>
-                                                        <option value="Córdoba">Córdoba</option>
-                                                        <option value="Cuenca">Cuenca</option>
-                                                        <option value="Gerona">Gerona</option>
-                                                        <option value="Granada">Granada</option>
-                                                        <option value="Guadalajara">Guadalajara</option>
-                                                        <option value="Guipúzcoa">Guipúzcoa</option>
-                                                        <option value="Huelva">Huelva</option>
-                                                        <option value="Huesca">Huesca</option>
-                                                        <option value="Islas Baleares">Islas Baleares</option>
-                                                        <option value="Jaén">Jaén</option>
-                                                        <option value="La Coruña">La Coruña</option>
-                                                        <option value="La Rioja">La Rioja</option>
-                                                        <option value="Las Palmas">Las Palmas</option>
-                                                        <option value="León">León</option>
-                                                        <option value="Lleida">Lleida</option>
-                                                        <option value="Lugo">Lugo</option>
-                                                        <option value="Madrid">Madrid</option>
-                                                        <option value="Málaga">Málaga</option>
-                                                        <option value="Melilla">Melilla</option>
-                                                        <option value="Murcia">Murcia</option>
-                                                        <option value="Navarra">Navarra</option>
-                                                        <option value="Orense">Orense</option>
-                                                        <option value="Palencia">Palencia</option>
-                                                        <option value="Pontevedra">Pontevedra</option>
-                                                        <option value="Salamanca">Salamanca</option>
-                                                        <option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option>
-                                                        <option value="Segovia">Segovia</option>
-                                                        <option value="Sevilla">Sevilla</option>
-                                                        <option value="Soria">Soria</option>
-                                                        <option value="Tarragona">Tarragona</option>
-                                                        <option value="Teruel">Teruel</option>
-                                                        <option value="Toledo">Toledo</option>
-                                                        <option value="Valencia">Valencia</option>
-                                                        <option value="Valladolid">Valladolid</option>
-                                                        <option value="Vizcaya">Vizcaya</option>
-                                                        <option value="Zamora">Zamora</option>
-                                                        <option value="Zaragoza">Zaragoza</option>
-                                                    </select>
+                                                    @Html.DropDownList("Address_Region", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem { Text = "Please Select Region", Value = "" },
+                                                    new SelectListItem { Text = "Álava", Value = "Álava" },
+                                                    new SelectListItem { Text = "Albacete", Value = "Albacete" },
+                                                    new SelectListItem { Text = "Alicante", Value = "Alicante" },
+                                                    new SelectListItem { Text = "Almería", Value = "Almería" },
+                                                    new SelectListItem { Text = "Asturias", Value = "Asturias" },
+                                                    new SelectListItem { Text = "Ávila", Value = "Ávila" },
+                                                    new SelectListItem { Text = "Badajoz", Value = "Badajoz" },
+                                                    new SelectListItem { Text = "Barcelona", Value = "Barcelona" },
+                                                    new SelectListItem { Text = "Burgos", Value = "Burgos" },
+                                                    new SelectListItem { Text = "Cáceres", Value = "Cáceres" },
+                                                    new SelectListItem { Text = "Cádiz", Value = "Cádiz" },
+                                                    new SelectListItem { Text = "Cantabria", Value = "Cantabria" },
+                                                    new SelectListItem { Text = "Castellón", Value = "Castellón" },
+                                                    new SelectListItem { Text = "Ceuta", Value = "Ceuta" },
+                                                    new SelectListItem { Text = "Ciudad Real", Value = "Ciudad Real" },
+                                                    new SelectListItem { Text = "Córdoba", Value = "Córdoba" },
+                                                    new SelectListItem { Text = "Cuenca", Value = "Cuenca" },
+                                                    new SelectListItem { Text = "Gerona", Value = "Gerona" },
+                                                    new SelectListItem { Text = "Granada", Value = "Granada" },
+                                                    new SelectListItem { Text = "Guadalajara", Value = "Guadalajara" },
+                                                    new SelectListItem { Text = "Guipúzcoa", Value = "Guipúzcoa" },
+                                                    new SelectListItem { Text = "Huelva", Value = "Huelva" },
+                                                    new SelectListItem { Text = "Huesca", Value = "Huesca" },
+                                                    new SelectListItem { Text = "Islas Baleares", Value = "Islas Baleares" },
+                                                    new SelectListItem { Text = "Jaén", Value = "Jaén" },
+                                                    new SelectListItem { Text = "La Coruña", Value = "La Coruña" },
+                                                    new SelectListItem { Text = "La Rioja", Value = "La Rioja" },
+                                                    new SelectListItem { Text = "Las Palmas", Value = "Las Palmas" },
+                                                    new SelectListItem { Text = "León", Value = "León" },
+                                                    new SelectListItem { Text = "Lleida", Value = "Lleida" },
+                                                    new SelectListItem { Text = "Lugo", Value = "Lugo" },
+                                                    new SelectListItem { Text = "Madrid", Value = "Madrid" },
+                                                    new SelectListItem { Text = "Málaga", Value = "Málaga" },
+                                                    new SelectListItem { Text = "Melilla", Value = "Melilla" },
+                                                    new SelectListItem { Text = "Murcia", Value = "Murcia" },
+                                                    new SelectListItem { Text = "Navarra", Value = "Navarra" },
+                                                    new SelectListItem { Text = "Orense", Value = "Orense" },
+                                                    new SelectListItem { Text = "Palencia", Value = "Palencia" },
+                                                    new SelectListItem { Text = "Pontevedra", Value = "Pontevedra" },
+                                                    new SelectListItem { Text = "Salamanca", Value = "Salamanca" },
+                                                    new SelectListItem { Text = "Santa Cruz de Tenerife", Value = "Santa Cruz de Tenerife" },
+                                                    new SelectListItem { Text = "Segovia", Value = "Segovia" },
+                                                    new SelectListItem { Text = "Sevilla", Value = "Sevilla" },
+                                                    new SelectListItem { Text = "Soria", Value = "Soria" },
+                                                    new SelectListItem { Text = "Tarragona", Value = "Tarragona" },
+                                                    new SelectListItem { Text = "Teruel", Value = "Teruel" },
+                                                    new SelectListItem { Text = "Toledo", Value = "Toledo" },
+                                                    new SelectListItem { Text = "Valencia", Value = "Valencia" },
+                                                    new SelectListItem { Text = "Valladolid", Value = "Valladolid" },
+                                                    new SelectListItem { Text = "Vizcaya", Value = "Vizcaya" },
+                                                    new SelectListItem { Text = "Zamora", Value = "Zamora" },
+                                                    new SelectListItem { Text = "Zaragoza", Value = "Zaragoza" }
+                                                    }, new { @class = "form-control" })
                                                     @Html.ValidationMessageFor(model => model.Address_Region, "", new { @class = "text-danger" })
                                                 </div>
                                                  <div class="col-6">
@@ -458,19 +463,20 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Energycertificate_Consumption, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <select class="form-control" name="Energycertificate_Consumption" id="Energycertificate_Consumption">
-                                                        <option value="">Please Select Consumption</option>
-                                                        <option value="Not available yet">Not available yet</option>
-                                                        <option value="Exempted property">Exempted property</option>
-                                                        <option value="Working on it">Working on it</option>
-                                                        <option value="A">A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="C">C</option>
-                                                        <option value="D">D</option>
-                                                        <option value="E">E</option>
-                                                        <option value="F">F</option>
-                                                        <option value="G">G</option>
-                                                    </select>
+                                                    @Html.DropDownList("Energycertificate_Consumption", new List<SelectListItem>
+                                                    {
+                                                    new SelectListItem { Text = "Please Select Consumption", Value = "" },
+                                                    new SelectListItem { Text = "Not available yet", Value = "Not available yet" },
+                                                    new SelectListItem { Text = "Exempted property", Value = "Exempted property" },
+                                                    new SelectListItem { Text = "Working on it", Value = "Working on it" },
+                                                    new SelectListItem { Text = "A", Value = "A" },
+                                                    new SelectListItem { Text = "B", Value = "B" },
+                                                    new SelectListItem { Text = "C", Value = "C" },
+                                                    new SelectListItem { Text = "D", Value = "D" },
+                                                    new SelectListItem { Text = "E", Value = "E" },
+                                                    new SelectListItem { Text = "F", Value = "F" },
+                                                    new SelectListItem { Text = "G", Value = "G" }
+                                                    }, new { @class = "form-control", id = "Energycertificate_Consumption" })
                                                     @Html.ValidationMessageFor(model => model.Energycertificate_Consumption, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -483,7 +489,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     @Html.LabelFor(model => model.Assetnotes_Annotations, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <textarea id="Assetnotes_Annotations" name="Assetnotes_Annotations" class="form-control" rows="6"></textarea>
+                                                    @Html.TextAreaFor(model => model.Assetnotes_Annotations, new { htmlAttributes = new { @class = "form-control",@row="6" } })
                                                     @Html.ValidationMessageFor(model => model.Assetnotes_Annotations, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -501,7 +507,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                              
                                                 <div class="col-12">
                                                     @Html.LabelFor(model => model.Cadastraldata_Cadastralreference, htmlAttributes: new { @class = "control-label col-md-5" })
                                                     @Html.EditorFor(model => model.Cadastraldata_Cadastralreference, new { htmlAttributes = new { @class = "form-control" } })
@@ -541,32 +547,32 @@
 
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Cadastralvalue, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Cadastraldata_Cadastralvalue, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Cadastraldata_Cadastralvalue, new { htmlAttributes = new { @class = "form-control" ,@type="number"} })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Cadastralvalue, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Squaremeters, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Cadastraldata_Squaremeters, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Cadastraldata_Squaremeters, new { htmlAttributes = new { @class = "form-control"  ,@type="number"} })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Squaremeters, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Usefulmeters, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Cadastraldata_Usefulmeters, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Cadastraldata_Usefulmeters, new { htmlAttributes = new { @class = "form-control"  ,@type="number"} })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Usefulmeters, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-12">
                                                     @Html.LabelFor(model => model.Cadastraldata_Constructiondate, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <input type="text" class="form-control" id="Cadastraldata_Constructiondate" name="Cadastraldata_Constructiondate" />
+                                                    <input type="date" class="form-control" id="Cadastraldata_Constructiondate" name="Cadastraldata_Constructiondate" />
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Constructiondate, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Saleprice, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Cadastraldata_Saleprice, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Cadastraldata_Saleprice, new { htmlAttributes = new { @class = "form-control" ,@type="number" } })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Saleprice, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Cadastraldata_Targetrentalprice, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Cadastraldata_Targetrentalprice, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Cadastraldata_Targetrentalprice, new { htmlAttributes = new { @class = "form-control"  ,@type="number"} })
                                                     @Html.ValidationMessageFor(model => model.Cadastraldata_Targetrentalprice, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -579,34 +585,34 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_Purchaseexpenses, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Expenses_Purchaseexpenses, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Expenses_Purchaseexpenses, new { htmlAttributes = new { @class = "form-control" ,@type="number" } })
                                                     @Html.ValidationMessageFor(model => model.Expenses_Purchaseexpenses, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_Purchaseexpensesdate, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <input type="text" class="form-control" id="Expenses_Purchaseexpensesdate" name="Expenses_Purchaseexpensesdate" />
+                                                    <input type="date" class="form-control" id="Expenses_Purchaseexpensesdate" name="Expenses_Purchaseexpensesdate" />
                                                     @Html.ValidationMessageFor(model => model.Expenses_Purchaseexpensesdate, "", new { @class = "text-danger" })
                                                 </div>
 
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_IBIexpenses, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Expenses_IBIexpenses, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Expenses_IBIexpenses, new { htmlAttributes = new { @class = "form-control" ,@type="number" } })
                                                     @Html.ValidationMessageFor(model => model.Expenses_IBIexpenses, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_IBIexpensescostsdate, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <input type="text" class="form-control" id="Expenses_IBIexpensescostsdate" name="Expenses_IBIexpensescostsdate" />
+                                                    <input type="date" class="form-control" id="Expenses_IBIexpensescostsdate" name="Expenses_IBIexpensescostsdate" />
                                                     @Html.ValidationMessageFor(model => model.Expenses_IBIexpensescostsdate, "", new { @class = "text-danger" })
                                                 </div>
 
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_Communityexpenses, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    @Html.EditorFor(model => model.Expenses_Communityexpenses, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.Expenses_Communityexpenses, new { htmlAttributes = new { @class = "form-control"  ,@type="number"} })
                                                     @Html.ValidationMessageFor(model => model.Expenses_Communityexpenses, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.Expenses_Communityexpensesdate, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <input type="text" class="form-control" id="Expenses_Communityexpensesdate" name="Expenses_Communityexpensesdate" />
+                                                    <input type="date" class="form-control" id="Expenses_Communityexpensesdate" name="Expenses_Communityexpensesdate" />
                                                     @Html.ValidationMessageFor(model => model.Expenses_Communityexpensesdate, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -626,7 +632,7 @@
                                             </div>
                                              <div class="row">
                                                 @Html.LabelFor(model => model.DocumentsFile, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                <input type="file" name="DocumentsFile" id="DocumentsFile">
+                                                <input type="file" name="DocumentsFile" id="DocumentsFile" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*">
                                                 @Html.ValidationMessageFor(model => model.DocumentsFile, "", new { @class = "text-danger" })
                                                  </div>
                                             <br /><br /><br />
@@ -649,12 +655,12 @@
 
                                                 <div class="col-6">
                                                     @Html.LabelFor(model => model.InventoryFile, htmlAttributes: new { @class = "control-label col-md-5" })
-                                                    <input type="file" name="InventoryFile"  id="InventoryFile">
+                                                    <input type="file" name="InventoryFile" id="InventoryFile" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*">
                                                     @Html.ValidationMessageFor(model => model.InventoryFile, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="button" name="next" class="next action-button" value="Submit" />
+                                        <input type="submit" name="next" class="next action-button" value="Submit" />
                                         <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                                     </fieldset>
                                     <fieldset>
@@ -668,20 +674,30 @@
                                                 </div>
                                             </div>
                                             <br><br>
-                                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
-                                            <br>
-                                            <div class="row justify-content-center">
-                                                <div class="col-3">
-                                                    <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
-                                                </div>
-                                            </div>
-                                            <br><br>
-                                            <div class="row justify-content-center">
-                                                <div class="col-7 text-center">
-                                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                                                </div>
-                                            </div>
+
+                                            @{
+                                                if (ViewBag.Status == true)
+                                                {
+                                                    <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
+                                                    <br>
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-3">
+                                                            <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+
+                                                    <br>
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-7 text-center">
+                                                            <h5 class="purple-text text-center">Asset/Property Add Successfully...!</h5>
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                            }
                                         </div>
+                                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                                     </fieldset>
                                 </form>
                             </div>
@@ -765,9 +781,7 @@
                 .css("width", percent + "%")
         }
 
-        $(".submit").click(function () {
-            return false;
-        })
+
 
     });
 </script>  

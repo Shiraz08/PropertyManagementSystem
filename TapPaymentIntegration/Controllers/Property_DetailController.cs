@@ -82,10 +82,9 @@ namespace Property_Management_Sys.Controllers
         {
             if (ModelState.IsValid)
             {
-                var getname = _context.Tbl_Landlord.Where(x => x.Landlord_Id == tbl_Property_Detail.LanLoadrd_Id).Select(x => x.Landlord_Name).FirstOrDefault();
-                tbl_Property_Detail.LanLoadrd_Name = getname;
-                var names = FirstCharToUpper(tbl_Property_Detail.Basic_Builiding_Name);
-                tbl_Property_Detail.Basic_Builiding_Name = names;
+                tbl_Property_Detail.Asset_data_Typeasset = "0";
+                tbl_Property_Detail.DocumentsFile = null;
+                tbl_Property_Detail.InventoryFile = null;
                 tbl_Property_Detail.Status = true;
                 tbl_Property_Detail.IsDeleted = false;
                 tbl_Property_Detail.AddedDate = DateTime.UtcNow;
@@ -93,9 +92,17 @@ namespace Property_Management_Sys.Controllers
                 tbl_Property_Detail.AppTenantId = Convert.ToInt32(GetCurrentUserAsync().Result.AppTenantId);
                 _context.Tbl_Property_Detail.Add(tbl_Property_Detail);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
+                tbl_Property_Detail = null;
+                ViewBag.Status = true;
             }
-            ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
+            else
+            {
+                ViewBag.LanLoadrd_Id = new SelectList(_context.Tbl_Landlord, "Landlord_Id", "Landlord_Name");
+                ViewBag.Status = false;
+                return View(tbl_Property_Detail);
+            }
             return View(tbl_Property_Detail);
         }
 
